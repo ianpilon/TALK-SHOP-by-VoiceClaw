@@ -68,9 +68,10 @@
   header .eyebrow { color: var(--accent); margin-bottom: 22px; }
   h1 {
     font-size: clamp(38px, 6.5vw, 66px);
-    font-weight: 900; line-height: 1.04; letter-spacing: -0.03em;
-    text-wrap: balance; max-width: 13ch;
+    font-weight: 900; line-height: 1.05; letter-spacing: -0.03em;
   }
+  h1 .line { display: block; text-wrap: balance; }
+  h1 .punchline { display: block; color: var(--accent); }
   .hero-sub {
     margin-top: 26px;
     font-size: clamp(17px, 2.2vw, 20px);
@@ -299,7 +300,7 @@
 <header>
   <div class="wrap">
     <div class="eyebrow">For owner-operators who are still the one answering the phone</div>
-    <h1>You can't ask your own business a question.</h1>
+    <h1><span class="line">You can't ask your business a question.</span> <span class="punchline">Now you can.</span></h1>
     <p class="hero-sub">Your company's facts are scattered across your industry software, your spreadsheets, your files, and three people's heads. Every answer costs a phone call, and the phone never stops. <strong>I connect what you already run into one system you can talk to. You ask. It answers.</strong></p>
     <div class="hero-ctas">
       <a class="btn btn-solid" href="#call">Book a 20-minute call</a>
