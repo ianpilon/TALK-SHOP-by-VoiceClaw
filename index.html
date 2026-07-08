@@ -49,13 +49,13 @@
   }
   .wordmark {
     color: var(--white); font-weight: 800; font-size: 16px;
-    letter-spacing: -0.01em; text-decoration: none;
-    display: flex; flex-direction: column; line-height: 1.25;
+    letter-spacing: 0.02em; text-decoration: none;
+    display: flex; align-items: baseline; gap: 7px; white-space: nowrap;
   }
   .wordmark .dot { color: var(--accent); }
-  .wordmark .product {
-    font-size: 10.5px; font-weight: 700; color: var(--accent);
-    letter-spacing: 0.18em;
+  .wordmark .by {
+    font-size: 12px; font-weight: 500; color: var(--mute-on-dark);
+    letter-spacing: 0;
   }
   .nav-cta {
     color: var(--white); text-decoration: none; font-weight: 600; font-size: 14px;
@@ -291,7 +291,7 @@
 
 <nav>
   <div class="wrap">
-    <a class="wordmark" href="#">VOICECLAW<span class="dot">.</span><span class="product">TALK SHOP</span></a>
+    <a class="wordmark" href="#"><span>TALK SHOP<span class="dot">.</span></span><span class="by">by VoiceClaw</span></a>
     <a class="nav-cta" href="#call">Book a 20-minute call</a>
   </div>
 </nav>
