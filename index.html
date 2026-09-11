@@ -1,618 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TALK SHOP by VoiceClaw. Ask your business a question. Get an answer.</title>
+<title>VoiceClaw. A managed business memory you can talk to.</title>
+<meta name="description" content="A managed business memory for owner-operators. We claw the answers out of your scattered data. Ask about any asset, customer, or job and get an answer by voice or text.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --dark: #0f1317;
-    --dark-2: #161c22;
-    --paper: #faf9f6;
-    --white: #ffffff;
-    --ink: #17202b;
-    --ink-soft: #4b5563;
-    --line: #e5e1d8;
-    --line-dark: #2a323b;
-    --accent: #ff5c1a;
-    --accent-down: #e64d0e;
-    --mute-on-dark: #9aa4ae;
+  :root{
+    --ground:#0d1126; --surface:#141936; --raised:#1a2040; --line:rgba(138,147,184,.18);
+    --ink:#f3f5ff; --ink-2:#c9cee6; --muted:#8a93b8; --accent:#22d3ee; --accent-ink:#06202a;
+    --glow:rgba(34,211,238,.45); --max:1120px; --gutter:clamp(20px,4vw,48px);
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--ink);
-    background: var(--paper);
-    line-height: 1.6;
-    font-size: 17px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 22px; }
-  .narrow { max-width: 720px; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance}
+  h1{font-size:clamp(38px,6vw,68px);line-height:1.02}
+  h2{font-size:clamp(28px,4vw,42px);line-height:1.08}
+  h3{font-size:20px;letter-spacing:-.01em}
+  p{margin:0}
+  .muted{color:var(--muted)}
+  .kicker{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:500}
+  em.hl{font-style:normal;color:var(--accent);text-shadow:0 0 26px var(--glow)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:500;font-size:15px;white-space:nowrap;transition:transform .15s ease,box-shadow .15s ease}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 0 var(--glow)}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--glow)}
+  .btn.ghost{color:var(--ink-2);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--muted)}
+  section{padding:clamp(72px,10vw,128px) 0;border-top:1px solid var(--line)}
+  section.flush{border-top:0}
 
-  .eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(13,17,38,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+  .logo{display:flex;align-items:center;color:var(--ink)}
+  .logo img{height:39px;width:auto;display:block}
+  nav ul{list-style:none;margin:0;padding:0;display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  nav ul a:hover{color:var(--ink)}
+  nav .btn{padding:10px 16px;font-size:14px}
+  @media (max-width:760px){nav ul{display:none}}
 
-  /* ---------- NAV ---------- */
-  nav { background: var(--dark); border-bottom: 1px solid var(--line-dark); }
-  nav .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-top: 18px; padding-bottom: 18px;
-  }
-  .wordmark {
-    color: var(--white); font-weight: 800; font-size: 16px;
-    letter-spacing: 0.02em; text-decoration: none;
-    display: flex; align-items: baseline; gap: 7px; white-space: nowrap;
-  }
-  .wordmark .dot { color: var(--accent); }
-  .wordmark .by {
-    font-size: 12px; font-weight: 500; color: var(--mute-on-dark);
-    letter-spacing: 0;
-  }
-  .nav-cta {
-    color: var(--white); text-decoration: none; font-weight: 600; font-size: 14px;
-    border: 1px solid var(--line-dark); padding: 9px 16px; border-radius: 6px;
-  }
-  .nav-cta:hover { border-color: var(--accent); }
+  /* hero */
+  .hero{padding:clamp(64px,9vw,120px) 0 clamp(56px,8vw,96px);position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 20% 0%,#1c2350 0%,transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,6vw,80px);align-items:start}
+  @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+  .hero p.lead{font-size:clamp(18px,2vw,21px);color:var(--ink-2);margin:26px 0 34px;max-width:520px;text-wrap:pretty}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .cta small{display:block;width:100%;color:var(--muted);font-size:13px;margin-top:6px}
 
-  /* ---------- HERO ---------- */
-  header { background: var(--dark); color: var(--white); padding: 72px 0 84px 0; }
-  header .eyebrow { color: var(--accent); margin-bottom: 22px; }
-  header .hero-for { margin: 28px 0 0; max-width: 44ch; line-height: 1.6; }
-  h1 {
-    font-size: clamp(34px, 4.8vw, 52px);
-    font-weight: 900; line-height: 1.05; letter-spacing: -0.03em;
-  }
-  h1 .line { display: block; text-wrap: balance; }
-  h1 .punchline { display: block; color: var(--accent); }
-  .hero-sub {
-    margin-top: 26px;
-    font-size: clamp(17px, 2.2vw, 20px);
-    color: var(--mute-on-dark);
-    max-width: 54ch;
-    text-wrap: pretty;
-  }
-  .hero-sub strong { color: var(--white); font-weight: 600; }
-  .hero-ctas { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; font-weight: 700; font-size: 16px; text-decoration: none;
-    padding: 15px 26px; border-radius: 6px; transition: background 0.15s ease;
-  }
-  .btn-solid { background: var(--accent); color: #fff; }
-  .btn-solid:hover { background: var(--accent-down); }
+  /* the phone, lifted from voiceclaw.ca and recoloured to the cyan system */
+  .hero-right{display:flex;flex-direction:column;align-items:center}
+  .phone{width:330px;max-width:100%;flex:0 0 auto;background:#08090b;border:1px solid rgba(138,147,184,.22);border-radius:42px;padding:12px;box-shadow:0 32px 64px -24px rgba(0,0,0,.75),inset 0 0 0 2px rgba(255,255,255,.02)}
+  .phone-screen{background:var(--surface);border-radius:31px;overflow:hidden;display:flex;flex-direction:column;height:602px}
+  .phone-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;border-bottom:1px solid var(--line);background:var(--raised)}
+  .pb-name img{height:18px;width:auto;display:block}
+  .pb-sub{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block}
+  .phone.live .live-dot{background:var(--accent);box-shadow:0 0 10px 2px var(--glow);animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
+  .chat{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:9px;scroll-behavior:smooth}
+  .bubble{max-width:86%;padding:10px 14px;border-radius:17px;font-size:14px;line-height:1.45;overflow-wrap:anywhere;animation:pop .18s ease-out}
+  .bubble.user{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:5px;font-weight:500}
+  .bubble.bot{align-self:flex-start;background:var(--raised);color:var(--ink);border-bottom-left-radius:5px}
+  .bubble.bot .lbl{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .bubble.bot .big{display:block;font-size:28px;font-weight:300;letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
+  .sys-lookup{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:5px 10px;border-radius:999px;border:1px solid var(--line);animation:pop .18s ease-out}
+  .vdot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px 1px var(--glow)}
+  .typing{align-self:flex-start;background:var(--raised);border-radius:17px 17px 17px 5px;padding:11px 14px;display:inline-flex;gap:4px;animation:pop .18s ease-out}
+  .typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1.2s ease infinite both}
+  .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}
+  @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .composer{display:flex;align-items:center;gap:10px;margin:10px 12px 12px;padding:8px 8px 8px 14px;border-radius:999px;background:var(--raised);border:1px solid var(--line);color:var(--ink);font:inherit;font-size:13.5px;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .composer:hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(34,211,238,.12)}
+  .composer:disabled{cursor:default;opacity:.7}
+  .composer .mic{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 2px var(--glow)}
+  .cq-wrap{flex:1;min-width:0;overflow:hidden;min-height:20px;position:relative}
+  .cq{display:block;color:var(--ink-2);line-height:1.35;font-size:13px}
+  .cq.in{animation:cqin .32s cubic-bezier(.2,.7,.2,1) both}
+  .cq.out{animation:cqout .22s ease-in both}
+  .cq.sent{animation:cqsend .28s ease-in both}
+  @keyframes cqin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes cqout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-14px)}}
+  @keyframes cqsend{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-22px) scale(.96)}}
+  .composer .send{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center}
+  .phone-cap{margin-top:18px;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.02em;max-width:34ch}
+  .phone-cap b{color:var(--ink);font-weight:500}
+  @media (max-width:760px){.phone-screen{height:550px}}
+  @media (prefers-reduced-motion:reduce){.phone.live .live-dot,.typing span{animation:none}}
 
-  /* hero grid + phone demo */
-  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 52px; }
-  @media (min-width: 880px) {
-    .hero-grid { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); gap: 56px; align-items: start; }
-  }
-  .ask-block {
-    display: flex; flex-direction: column; gap: 10px;
-    width: 330px; max-width: 100%; margin: 0 0 20px;
-  }
-  .vh-label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.14em; color: var(--accent);
-  }
-  .ask-q {
-    text-align: left; background: none; border: none; padding: 0;
-    font-family: inherit; font-size: 15px; color: #cbd2d9;
-    cursor: pointer; line-height: 1.5; transition: color 0.15s ease;
-  }
-  .ask-q:hover { color: var(--white); }
-  .ask-q:disabled { opacity: 0.45; cursor: default; }
+  /* problem strip */
+  .problem .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+  @media (max-width:820px){.problem .wrap{grid-template-columns:1fr}}
+  .quotes{display:flex;flex-direction:column;gap:14px;font-size:clamp(22px,2.6vw,30px);font-weight:500;letter-spacing:-.02em;line-height:1.2}
+  .quotes span:nth-child(2){color:var(--ink-2)}.quotes span:nth-child(3){color:var(--muted)}
+  .problem p{color:var(--ink-2);max-width:460px;text-wrap:pretty}
+  .problem p + p{margin-top:16px}
 
-  .hero-right { display: flex; flex-direction: column; align-items: center; }
-  .phone {
-    width: 330px; max-width: 100%; flex: none;
-    background: #08090b; border: 1px solid var(--line-dark);
-    border-radius: 42px; padding: 12px;
-    box-shadow: 0 32px 64px -24px rgba(0,0,0,0.75), inset 0 0 0 2px rgba(255,255,255,0.02);
-  }
-  .phone-screen {
-    background: var(--dark-2); border-radius: 31px; overflow: hidden;
-    display: flex; flex-direction: column; height: 552px;
-  }
-  .phone-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px 12px; border-bottom: 1px solid var(--line-dark);
-    background: #1a2027;
-  }
-  .pb-name { font-weight: 800; font-size: 13px; letter-spacing: 0.04em; color: var(--white); }
-  .pb-name span { color: var(--accent); }
-  .pb-sub {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--mute-on-dark);
-  }
-  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mute-on-dark); flex: none; }
-  .phone.live .live-dot { background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.45; transform: scale(0.78);} }
-  .chat {
-    flex: 1; overflow-y: auto; padding: 18px 13px;
-    display: flex; flex-direction: column; gap: 9px; scroll-behavior: smooth;
-  }
-  .chat-hint {
-    margin: auto; text-align: center; color: var(--mute-on-dark);
-    font-size: 13px; max-width: 24ch; line-height: 1.55;
-  }
-  .bubble {
-    max-width: 86%; padding: 10px 14px; border-radius: 17px;
-    font-size: 14px; line-height: 1.45; overflow-wrap: break-word;
-    animation: pop 0.18s ease-out;
-  }
-  .bubble.user { align-self: flex-end; background: #2b323a; color: #fff; border-bottom-right-radius: 5px; }
-  .bubble.bot { align-self: flex-start; background: #2563eb; color: #fff; border-bottom-left-radius: 5px; font-weight: 500; }
-  .sys-lookup {
-    align-self: center; display: inline-flex; align-items: center; gap: 7px;
-    font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: #7ee2a8; background: rgba(46,158,91,0.12);
-    border: 1px solid rgba(46,158,91,0.30); border-radius: 999px;
-    padding: 4px 11px; animation: pop 0.18s ease-out;
-  }
-  .sys-lookup .vdot { width: 5px; height: 5px; border-radius: 50%; background: #2e9e5b; }
-  .typing {
-    align-self: flex-start; background: #232a32; border-radius: 17px;
-    border-bottom-left-radius: 5px; padding: 11px 14px;
-    display: inline-flex; gap: 4px; animation: pop 0.18s ease-out;
-  }
-  .typing span {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--mute-on-dark);
-    animation: blink 1.2s infinite both;
-  }
-  .typing span:nth-child(2) { animation-delay: 0.2s; }
-  .typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes blink { 0%,80%,100% { opacity: 0.25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-2px); } }
-  @keyframes pop { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-  .phone-cap {
-    margin-top: 18px; text-align: center;
-    font-size: 12.5px; color: var(--mute-on-dark); letter-spacing: 0.02em;
-    max-width: 34ch;
-  }
-  .phone-cap b { color: var(--white); }
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,48px);margin-top:56px}
+  @media (max-width:820px){.steps{grid-template-columns:1fr}}
+  .step{border-top:1px solid var(--line);padding-top:22px}
+  .step .n{display:block;font-size:44px;font-weight:300;color:var(--accent);text-shadow:0 0 22px var(--glow);letter-spacing:-.03em;line-height:1;margin-bottom:16px}
+  .step h3{margin-bottom:10px}
+  .step p{color:var(--muted);font-size:15.5px;text-wrap:pretty}
+  .step ul{margin:14px 0 0;padding:0;list-style:none;color:var(--ink-2);font-size:14px;display:flex;flex-direction:column;gap:6px}
+  .step ul li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:middle;box-shadow:0 0 8px 1px var(--glow)}
 
-  /* ---------- SECTIONS ---------- */
-  section { padding: 84px 0; }
-  section h2 {
-    font-size: clamp(28px, 4.2vw, 42px);
-    font-weight: 800; letter-spacing: -0.025em; line-height: 1.12;
-    text-wrap: balance; margin-bottom: 18px;
-  }
-  section .lede { font-size: 19px; color: var(--ink-soft); max-width: 60ch; text-wrap: pretty; }
-  .section-eyebrow { color: var(--accent); margin-bottom: 14px; }
+  /* what it answers */
+  .bank{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,48px);margin-top:48px}
+  @media (max-width:820px){.bank{grid-template-columns:1fr}}
+  .bank h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .bank ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:17px;color:var(--ink-2)}
+  .bank ul li::before{content:"“";color:var(--accent);margin-right:4px}
+  .bank ul li::after{content:"”";color:var(--accent);margin-left:2px}
 
-  /* symptoms */
-  .symptoms { border-top: 1px solid var(--line); }
-  .symptom-list { margin-top: 42px; }
-  .symptom {
-    display: grid; grid-template-columns: 52px 1fr; gap: 18px;
-    padding: 22px 0; border-top: 1px solid var(--line); align-items: baseline;
-  }
-  .symptom:last-child { border-bottom: 1px solid var(--line); }
-  .symptom .n {
-    font-weight: 800; font-size: 15px; color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .symptom p { font-size: 18px; font-weight: 500; max-width: 58ch; }
-  .symptom p em { font-style: normal; color: var(--ink-soft); font-weight: 400; }
-  .punch {
-    margin-top: 40px;
-    font-size: clamp(21px, 3vw, 27px);
-    font-weight: 800; letter-spacing: -0.02em;
-    max-width: 30ch; text-wrap: balance;
-  }
-  .punch span { color: var(--accent); }
+  /* on top of */
+  .layer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+  @media (max-width:820px){.layer .wrap{grid-template-columns:1fr}}
+  .layer p{color:var(--ink-2);text-wrap:pretty;max-width:480px}
+  .layer p + p{margin-top:16px}
+  .stack{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .stack > div{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:15px}
+  .stack > div + div{border-top:1px solid var(--line)}
+  .stack .top{background:var(--raised)}
+  .stack .top b{color:var(--accent);font-weight:500}
+  .stack .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .stack .sys{color:var(--ink-2)}
 
-  /* who it's for */
-  .who-for { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .persona-list { margin-top: 38px; }
-  .persona {
-    display: grid; grid-template-columns: 250px 1fr; gap: 32px;
-    padding: 24px 0; border-top: 1px solid var(--line); align-items: baseline;
-  }
-  .persona:last-of-type { border-bottom: 1px solid var(--line); }
-  .persona h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
-  .persona p { color: var(--ink-soft); font-size: 16.5px; max-width: 60ch; }
-  .fit-note {
-    margin-top: 40px;
-    font-size: clamp(19px, 2.6vw, 24px);
-    font-weight: 800; letter-spacing: -0.02em;
-    max-width: 36ch; text-wrap: balance;
-  }
-  .fit-note span { color: var(--accent); }
-  .fit-fine { margin-top: 14px; color: var(--ink-soft); font-size: 16px; max-width: 62ch; }
+  /* who */
+  .who .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);margin-top:40px}
+  @media (max-width:820px){.who .cols{grid-template-columns:1fr}}
+  .who h3{margin-bottom:12px}
+  .who ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;color:var(--ink-2);font-size:16px}
+  .who ul.no{color:var(--muted)}
 
-  /* what it is */
-  .what-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; margin-top: 8px; }
-  .what-grid p { margin-bottom: 16px; color: var(--ink); font-size: 17.5px; }
-  .what-grid p.dim { color: var(--ink-soft); }
-  .keeps { padding-top: 6px; }
-  .keeps h3 {
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.14em; color: var(--ink-soft); margin-bottom: 14px;
-  }
-  .keeps ul { list-style: none; }
-  .keeps li {
-    padding: 12px 0; border-top: 1px solid var(--line);
-    font-weight: 600; font-size: 16px;
-    display: flex; justify-content: space-between; gap: 12px;
-  }
-  .keeps li:last-child { border-bottom: 1px solid var(--line); }
-  .keeps li span { color: var(--ink-soft); font-weight: 400; font-size: 14px; white-space: nowrap; }
-
-  /* three things */
-  .three .item {
-    display: grid; grid-template-columns: 200px 1fr; gap: 32px;
-    padding: 34px 0; border-top: 1px solid var(--line);
-  }
-  .three .item:last-of-type { border-bottom: 1px solid var(--line); }
-  .three .item h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; }
-  .three .item p { color: var(--ink-soft); max-width: 58ch; }
-  .three .item p b { color: var(--ink); font-weight: 600; }
-  .three .q {
-    display: inline-block; background: var(--white);
-    border: 1px solid var(--line); border-radius: 100px;
-    padding: 5px 14px; font-size: 14px; font-weight: 500; color: var(--ink);
-    margin: 10px 8px 0 0;
-  }
-
-  /* 90 days */
-  .plan .phase {
-    display: grid; grid-template-columns: 150px 1fr; gap: 32px;
-    padding: 34px 0; border-top: 1px solid var(--line);
-  }
-  .plan .phase:last-of-type { border-bottom: 1px solid var(--line); }
-  .plan .days { font-weight: 800; font-size: 15px; color: var(--ink); }
-  .plan .days small { display: block; color: var(--ink-soft); font-weight: 500; margin-top: 3px; font-size: 13px; }
-  .plan .phase h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .plan .phase p { color: var(--ink-soft); max-width: 60ch; }
-  .stop {
-    margin-top: 52px;
-    background: var(--dark); color: var(--white);
-    border-radius: 12px; padding: 44px 44px;
-  }
-  .stop .eyebrow { color: var(--accent); margin-bottom: 16px; }
-  .stop p {
-    font-size: clamp(20px, 2.8vw, 26px);
-    font-weight: 700; letter-spacing: -0.02em; line-height: 1.35;
-    max-width: 44ch; text-wrap: balance;
-  }
-  .stop p b { color: var(--accent); font-weight: 700; }
-  .stop .small { font-size: 15px; font-weight: 400; color: var(--mute-on-dark); margin-top: 16px; max-width: 60ch; }
-
-  /* objections */
-  .objections .qa { padding: 30px 0; border-top: 1px solid var(--line); }
-  .objections .qa:last-of-type { border-bottom: 1px solid var(--line); }
-  .objections .qa h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
-  .objections .qa h3::before { content: "\201C"; color: var(--accent); margin-right: 2px; }
-  .objections .qa h3::after { content: "\201D"; color: var(--accent); margin-left: 2px; }
-  .objections .qa p { color: var(--ink-soft); max-width: 62ch; }
-  .objections .qa p b { color: var(--ink); font-weight: 600; }
+  /* engagement */
+  .engage .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(24px,4vw,48px);margin-top:48px}
+  @media (max-width:820px){.engage .row{grid-template-columns:1fr}}
+  .engage .row > div{border-top:1px solid var(--line);padding-top:20px}
+  .engage .t{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:500}
+  .engage h3{margin-bottom:8px}
+  .engage p{color:var(--muted);font-size:15.5px;text-wrap:pretty}
+  .proof{margin-top:56px;padding:26px 28px;border-left:2px solid var(--accent);background:linear-gradient(90deg,rgba(34,211,238,.06),transparent 60%);border-radius:0 14px 14px 0}
+  .proof p{color:var(--ink-2);font-size:17px;max-width:760px;text-wrap:pretty}
+  .proof small{display:block;color:var(--muted);font-size:13px;margin-top:10px}
 
   /* final cta */
-  .final { background: var(--dark); color: var(--white); padding: 96px 0; }
-  .final h2 { color: var(--white); max-width: 22ch; }
-  .final .lede { color: var(--mute-on-dark); margin-top: 6px; }
-  .final .lede b { color: var(--white); font-weight: 600; }
-  .final .hero-ctas { margin-top: 34px; }
-
-  footer {
-    background: var(--dark); border-top: 1px solid var(--line-dark);
-    color: var(--mute-on-dark); font-size: 14px; padding: 26px 0;
-  }
-  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  footer a { color: var(--white); text-decoration: none; font-weight: 600; }
-
-  @media (max-width: 760px) {
-    body { font-size: 16px; }
-    header { padding: 52px 0 60px 0; }
-    .hero-grid { gap: 40px; }
-    .phone-screen { height: 500px; }
-    .what-grid { grid-template-columns: 1fr; gap: 30px; }
-    .three .item, .plan .phase, .persona { grid-template-columns: 1fr; gap: 8px; }
-    .stop { padding: 30px 24px; }
-    section { padding: 60px 0; }
-  }
+  .final{text-align:center;padding-bottom:clamp(72px,10vw,120px)}
+  .final h2{max-width:720px;margin:0 auto 18px}
+  .final p{color:var(--muted);max-width:560px;margin:0 auto 32px;text-wrap:pretty}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer .logo img{height:27px;opacity:.7}
+  @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <a class="wordmark" href="#"><span>TALK SHOP<span class="dot">.</span></span><span class="by">by VoiceClaw</span></a>
-    <a class="nav-cta" href="https://cal.com/ian-pilon/20min" target="_blank" rel="noopener">Book a 20-minute call</a>
+    <a class="logo" href="#top" aria-label="VoiceClaw"><img src="assets/voiceclaw-logo.svg" alt="VoiceClaw"></a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#answers">What it answers</a></li>
+      <li><a href="#layer">What it sits on</a></li>
+      <li><a href="#who">Who it's for</a></li>
+      <li><a href="#engage">How we work</a></li>
+    </ul>
+    <a class="btn primary" href="https://cal.com/ian-pilon/20min">Book a 20-minute call</a>
   </div>
 </nav>
 
-<header>
+<header class="hero" id="top">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <h1><span class="line">The shop closes at 5.</span> <span class="punchline">The paperwork doesn't.</span></h1>
-        <p class="hero-sub">Your company's facts are scattered across your industry software, your spreadsheets, your files, and three people's heads. <strong>I connect what you already run into one system you can talk to. You ask. It answers.</strong></p>
-        <div class="hero-ctas">
-          <a class="btn btn-solid" href="https://cal.com/ian-pilon/20min" target="_blank" rel="noopener">Book a 20-minute call</a>
-        </div>
-        <div class="eyebrow hero-for">For owner-operators who didn't build a business to be on call for it</div>
+    <div>
+      <span class="kicker">For owner-operators</span>
+      <h1>A managed business memory you can <em class="hl">talk to.</em></h1>
+      <p class="lead">Ask about any asset, customer, or job and get an answer by voice or text instead of chasing people.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://cal.com/ian-pilon/20min">Book a 20-minute call</a>
+        <a class="btn ghost" href="#how">See how it works</a>
+        <small>We run it for you. Nothing to install, nothing to replace.</small>
       </div>
-      <div class="hero-right">
-        <div class="ask-block">
-          <div class="vh-label">Tap a question</div>
-          <button class="ask-q" data-scn="1">"What's actually ready to go out this week?"</button>
-          <button class="ask-q" data-scn="2">"When did we last service the Hendersons?"</button>
-        </div>
-        <div class="phone" id="phone">
-          <div class="phone-screen">
-            <div class="phone-bar">
-              <div class="pb-name">TALK SHOP<span>.</span></div>
-              <div class="pb-sub"><span class="live-dot"></span><span id="phoneState">standby</span></div>
-            </div>
-            <div class="chat" id="chat">
-              <div class="chat-hint" id="chatHint">Tap a question to see it answered.</div>
-            </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="phone" id="phone" aria-label="Example conversation with the business memory">
+        <div class="phone-screen">
+          <div class="phone-bar">
+            <div class="pb-name"><img src="assets/voiceclaw-logo.svg" alt="VoiceClaw"></div>
+            <div class="pb-sub"><span class="live-dot"></span><span id="phoneState">standby</span></div>
           </div>
+          <div class="chat" id="chat"></div>
+          <button class="composer" id="composer" type="button" aria-label="Send the suggested question">
+            <span class="mic" aria-hidden="true"></span>
+            <span class="cq-wrap"><span class="cq" id="cq">Ask by voice or text</span></span>
+            <span class="send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></span>
+          </button>
         </div>
-        <p class="phone-cap">The old way: four people and a callback, sometime today. <b>This way: four seconds.</b></p>
       </div>
     </div>
   </div>
 </header>
 
-<section class="symptoms">
+<section class="problem">
   <div class="wrap">
-    <div class="eyebrow section-eyebrow">Sound familiar?</div>
-    <h2>You run the company by chasing people.</h2>
-    <p class="lede">Doesn't matter what's on the side of your trucks. If most of these hit home, keep reading.</p>
-    <div class="symptom-list">
-      <div class="symptom"><span class="n">01</span><p>You're on call 24/7/365. <em>Work finds you at your kid's game and at family functions.</em></p></div>
-      <div class="symptom"><span class="n">02</span><p>You wake up reactive. <em>Your day starts wherever the first phone call says it starts.</em></p></div>
-      <div class="symptom"><span class="n">03</span><p>Basic questions route through three people. <em>And the answer comes back "sometime today."</em></p></div>
-      <div class="symptom"><span class="n">04</span><p>Too much of the business lives in people's heads. <em>When the wrong person is away, the answers go with them.</em></p></div>
-      <div class="symptom"><span class="n">05</span><p>The whiteboard is a week behind reality. <em>So you say no to work you could have taken.</em></p></div>
-      <div class="symptom"><span class="n">06</span><p>Every system you pay for holds a piece of the story. <em>None of them holds the whole thing.</em></p></div>
+    <div>
+      <span class="kicker">The problem</span>
+      <div class="quotes"><span>"I'd have to check."</span><span>"Let me get back to you."</span><span>"It's in a text somewhere."</span></div>
     </div>
-    <p class="punch">None of this is a you problem. <span>The problem is that you're the wiring.</span></p>
-  </div>
-</section>
-
-<section class="who-for">
-  <div class="wrap">
-    <div class="eyebrow section-eyebrow">Who this is for</div>
-    <h2>Different trucks. Same 9pm phone call.</h2>
-    <p class="lede">I work with owner-operated businesses that own assets, send crews, or keep a shop running. The industry changes. The wiring job doesn't: it's still you.</p>
-    <div class="persona-list">
-      <div class="persona">
-        <h3>Equipment rental &amp; leasing</h3>
-        <p>Trailers, lifts, generators, containers, dumpsters, storage. You can't say what's on rent, what's ready, and what's sitting in repair without asking somebody.</p>
-      </div>
-      <div class="persona">
-        <h3>Service trades with crews</h3>
-        <p>HVAC, plumbing, electrical, landscaping, roofing, snow. Job history lives in texts and truck cabs, and quoting means reconstructing what happened last time.</p>
-      </div>
-      <div class="persona">
-        <h3>Small fleets &amp; hauling</h3>
-        <p>Trucking, towing, vac trucks, delivery. Dispatch knows some of it, the GPS knows some of it, the binder in the shop knows the rest.</p>
-      </div>
-      <div class="persona">
-        <h3>Repair &amp; fab shops</h3>
-        <p>Diesel, auto, marine, machine shops. Work orders get closed from memory, parts photos have no part numbers, and billing leaks at every handoff.</p>
-      </div>
-      <div class="persona">
-        <h3>Field services</h3>
-        <p>Septic, well drilling, pest control, property maintenance, excavation. Every site has a history, and the history lives in the owner's head.</p>
-      </div>
-    </div>
-    <p class="fit-note">If your business owns assets, sends crews, or answers a phone at 9pm, <span>it qualifies.</span></p>
-    <p class="fit-fine">The usual shape: 5 to 50 people. The owner still answers the phone. The office runs on one industry software package, a stack of spreadsheets, and one person who knows where everything is.</p>
-  </div>
-</section>
-
-<section class="what" id="what">
-  <div class="wrap">
-    <div class="eyebrow section-eyebrow">What this is</div>
-    <h2>TALK SHOP: a business you can talk to. I build it, and I keep it running.</h2>
-    <div class="what-grid">
-      <div>
-        <p>Right now, the only thing connecting your systems is you. I'm Ian, and I take over that job: I connect the systems you already run, and the paper and spreadsheets in between, into one clean record for every unit, job, and customer. Service history, paperwork status, availability, hours, photos. One place, current, and able to answer questions in plain language.</p>
-        <p class="dim">Nothing gets ripped out. Nothing gets replaced. A read-only layer sits on top of your existing systems and pulls them together. Your people keep working the way they work today.</p>
-        <p class="dim">And you don't buy software from me. You get a working system with a person attached. When one of your systems changes and something breaks, that's my problem to fix, not yours.</p>
-      </div>
-      <div class="keeps">
-        <h3>You keep what you have</h3>
-        <ul>
-          <li>Your industry software <span>stays</span></li>
-          <li>Your accounting <span>stays</span></li>
-          <li>Your GPS or dispatch <span>stays</span></li>
-          <li>Your files and folders <span>stay</span></li>
-          <li>Your spreadsheets <span>stay, for now</span></li>
-          <li>Your people <span>stay</span></li>
-        </ul>
-      </div>
+    <div>
+      <p>If you own a small operation, you are the filing system. The answer to almost any question is in a text thread, a spreadsheet, a PDF in Dropbox, or the head of whoever did the job.</p>
+      <p>So you chase people. You call the tech, you text the office, you wait. Not because the information does not exist, but because it is scattered across everything you run.</p>
     </div>
   </div>
 </section>
 
-<section class="three">
+<section id="how">
   <div class="wrap">
-    <div class="eyebrow section-eyebrow">What it does</div>
-    <h2>Three things, measured in hours you get back.</h2>
-    <div style="margin-top: 30px;">
-      <div class="item">
-        <h3>Ask your business anything</h3>
-        <div>
-          <p>Plain-language questions over every unit, job, customer, and service record. Answers in seconds, <b>not callbacks</b>.</p>
-          <span class="q">"All service calls Monday to Friday"</span>
-          <span class="q">"What's ready to go out this week?"</span>
-          <span class="q">"When did we last service the Hendersons?"</span>
-        </div>
-      </div>
-      <div class="item">
-        <h3>Paperwork that flags itself</h3>
-        <p>Inspections, registrations, certifications, contracts, missing documents. You hear about an expiry <b>before it costs money</b>, not after a customer or an inspector finds it first.</p>
-      </div>
-      <div class="item">
-        <h3>Emergencies handled without you</h3>
-        <p>Something breaks on a Saturday. The right vetted vendor or the right answer gets found from a list that's already built. <b>You stay at the barbecue.</b></p>
-      </div>
+    <span class="kicker">How it works</span>
+    <h2>We claw the answers out of your scattered data. Then you ask.</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>We pull it out</h3><p>We connect to the systems you already run and get the data out, including the old software nobody can export from. Where a system will not give it up, we find another way.</p>
+        <ul><li>Legacy job and accounting software</li><li>Spreadsheets, texts, and emails</li><li>Signed documents and photos</li></ul></div>
+      <div class="step"><span class="n">2</span><h3>It becomes one memory</h3><p>Every asset, every customer, every job gets one record, with its history attached. New work flows in as it happens, so the memory stays current without anyone re-typing anything.</p>
+        <ul><li>One record per asset, customer, and job</li><li>Kept current from the shop floor</li><li>Runs where you choose, including in your own building</li></ul></div>
+      <div class="step"><span class="n">3</span><h3>You ask, it answers</h3><p>Ask out loud or by text, from the truck or the desk, the way you would ask a person. It answers in seconds with the record behind it, so you can check it.</p>
+        <ul><li>Voice or text, phone or desk</li><li>Answers with the source shown</li><li>Access controls for staff</li></ul></div>
     </div>
   </div>
 </section>
 
-<section class="plan" id="plan">
+<section id="answers">
   <div class="wrap">
-    <div class="eyebrow section-eyebrow">How it works</div>
-    <h2>A 90-day evaluation, built around your business.</h2>
-    <p class="lede">No two operations run on the same mix of systems, so nothing here is off the shelf. The first 90 days have one job: prove, with your systems and your data, that this works in your business. Then you decide.</p>
-    <div style="margin-top: 30px;">
-      <div class="phase">
-        <div class="days">First<small>Discovery</small></div>
-        <div>
-          <h3>Can the data come out of your systems?</h3>
-          <p>Every engagement starts inside your operation, not on a sales call: mapping every system, login, spreadsheet, and binder, and testing what data can actually be pulled from each one. On site when your setup calls for it. This is where the plan for your business gets written.</p>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="days">Then<small>The pilot</small></div>
-        <div>
-          <h3>One clean slice, end to end.</h3>
-          <p>The next new unit, job, or customer gets a complete record from day one. Your crew records the handful of fields that matter on the phones they already carry. One clean example becomes the model for everything after it.</p>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="days">By day 90<small>Your call</small></div>
-        <div>
-          <h3>The assistant goes in your hands. You test it.</h3>
-          <p>You've been asking it real questions about your own business. Now you get an honest readout against the goals we set together, and you decide whether to continue. Month to month after that.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="stop">
-      <div class="eyebrow">The stop promise</div>
-      <p>If discovery shows your data can't come out of your systems, <b>I tell you straight away and we stop.</b></p>
-      <p class="small">You'll have spent weeks learning the truth about your systems instead of years paying for a promise. That's the opposite of how the last software guy treated you, and it's the point.</p>
+    <span class="kicker">What it answers</span>
+    <h2>The questions you chase people for today.</h2>
+    <div class="bank">
+      <div><h3>Jobs</h3><ul><li>What jobs are still open from last week?</li><li>Who did the last job at that address?</li><li>Did that get done?</li><li>What did that job cost us?</li></ul></div>
+      <div><h3>Paperwork</h3><ul><li>Where is the paperwork for that job?</li><li>What expires this month?</li><li>Is that contract signed?</li><li>Where is the certificate for that unit?</li></ul></div>
+      <div><h3>Money and customers</h3><ul><li>What did we quote them last time?</li><li>Who owes us the most right now?</li><li>When did we last do work for them?</li><li>Which customers have gone quiet?</li></ul></div>
     </div>
   </div>
 </section>
 
-<section class="objections">
-  <div class="wrap narrow">
-    <div class="eyebrow section-eyebrow">Fair questions</div>
-    <h2>You've heard software promises before.</h2>
-    <div style="margin-top: 30px;">
-      <div class="qa">
-        <h3>We've been burned by software people.</h3>
-        <p>Most software people sell a promise, then bill you while you wait for it. This engagement is built backwards from that: a hard checkpoint as soon as discovery is done, an honest verdict at day 90, month to month after. <b>You never pay for a roadmap.</b></p>
-      </div>
-      <div class="qa">
-        <h3>Our data is a mess.</h3>
-        <p>Expected. Every owner-operated business I've looked at is missing half its fields. The first 30 days maps exactly where the gaps are and why they happen. Then we start clean with one new unit or job, <b>not a cleanup of your whole history</b>.</p>
-      </div>
-      <div class="qa">
-        <h3>My office manager already knows where everything is.</h3>
-        <p>She's good, and she stays. The problem is that she's the only copy. The system gets built around her way of working and removes the chasing that eats her day. <b>It backs her up, it doesn't replace her.</b></p>
-      </div>
-      <div class="qa">
-        <h3>My business is different.</h3>
-        <p>The details are, and that's why the first 30 days are discovery on site, not a demo. But the shape underneath, disconnected systems plus one person holding it together plus an owner on call, <b>shows up in every trade I've mapped</b>.</p>
-      </div>
-      <div class="qa">
-        <h3>What does it cost?</h3>
-        <p>One flat monthly fee that covers the build, the fixes, and the upkeep. From day one we keep a running tracker of tool subscriptions the system can retire and hours it hands back, so <b>you can see the fee paying for itself</b>, on paper, in numbers you can check.</p>
-      </div>
+<section id="layer" class="layer">
+  <div class="wrap">
+    <div>
+      <span class="kicker">What it sits on</span>
+      <h2>A layer on top of what you already run. Not a rip and replace.</h2>
+      <p style="margin-top:20px">Your job software, your accounting package, your document signing, your shared drive: they all stay. We read from them and write back where it helps. Nobody has to learn a new system on day one.</p>
+      <p>When a system is holding you back, you decide whether to replace it, with the data already in hand.</p>
+    </div>
+    <div class="stack" aria-label="The memory sits above your existing systems">
+      <div class="top"><span class="lbl">Business memory</span><b>Ask by voice or text</b></div>
+      <div><span class="lbl">Reads from</span><span class="sys">Job and work-order software</span></div>
+      <div><span class="lbl">Reads from</span><span class="sys">Accounting and invoicing</span></div>
+      <div><span class="lbl">Reads from</span><span class="sys">Signed documents and shared drives</span></div>
+      <div><span class="lbl">Reads from</span><span class="sys">Spreadsheets, texts, photos</span></div>
+      <div><span class="lbl">Captures</span><span class="sys">New work from the shop floor, on the phone your techs already carry</span></div>
     </div>
   </div>
 </section>
 
-<section class="final" id="call">
+<section id="who" class="who">
   <div class="wrap">
-    <div class="eyebrow section-eyebrow">Next step</div>
-    <h2>You didn't start a business to become its secretary.</h2>
-    <p class="lede">Want to hear what your business sounds like if you could call it? Book a 20-minute call. <b>Bring one process you think takes up way more of your time than it should.</b> I'll show you exactly how it comes off your plate, and what the 90 days would look like for your business.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-solid" href="https://cal.com/ian-pilon/20min" target="_blank" rel="noopener">Book a 20-minute call</a>
+    <span class="kicker">Who it's for</span>
+    <h2>Owner-operators who are the filing system.</h2>
+    <div class="cols">
+      <div><h3>A good fit</h3><ul>
+        <li>You own and run the business, with a crew of five to fifty.</li>
+        <li>You service, rent, lease, or maintain physical things: equipment, vehicles, trailers, properties, tools.</li>
+        <li>Your records live in three or more places and one of them is a person.</li>
+        <li>You want it handled, not another piece of software to administer.</li>
+      </ul></div>
+      <div><h3>Not a fit yet</h3><ul class="no">
+        <li>You want software to install and run yourself.</li>
+        <li>Your data already lives in one modern system that answers your questions.</li>
+        <li>You are looking for a phone-answering service. This is memory, not reception.</li>
+      </ul></div>
     </div>
+  </div>
+</section>
+
+<section id="engage" class="engage">
+  <div class="wrap">
+    <span class="kicker">How we work</span>
+    <h2>A managed service. We build it, we run it, you ask it.</h2>
+    <div class="row">
+      <div><span class="t">First 90 days</span><h3>Foundation</h3><p>We map every system you run, get the data out, fix where it goes missing on the way in, and take one real asset end to end. You test it yourself before anything else gets built.</p></div>
+      <div><span class="t">Then</span><h3>Managed, monthly</h3><p>We keep the memory current, add the questions you need next, and stay on call. Fixed pilot fee, then a flat monthly fee. Numbers on the call, not on a pricing page.</p></div>
+      <div><span class="t">Always</span><h3>Your data, your building</h3><p>It can run on a machine in your office. Nothing leaves unless you decide it should. Hosting elsewhere is your call, presented as a trade-off, never a default.</p></div>
+    </div>
+    <div class="proof">
+      <p>Built first for a reefer trailer leasing and service company in Ontario. Fourteen years of work orders, parts, invoices, and rentals clawed out of a legacy system that had no export, and put in front of the owner as one memory he can ask.</p>
+      <small>First customer, engagement ongoing. References on request.</small>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="book">
+  <div class="wrap">
+    <h2>Still chasing people for <em class="hl">answers?</em></h2>
+    <p>Twenty minutes. Bring the three questions you asked someone this week. We will tell you honestly whether your data can be clawed out, and what it would take.</p>
+    <a class="btn primary" href="https://cal.com/ian-pilon/20min">Book a 20-minute call</a>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div>TALK SHOP by VoiceClaw · run by <a href="mailto:ianpilon@gmail.com">Ian Pilon</a></div>
-    <div>Built for owner-operators. One business at a time.</div>
+    <a class="logo" href="#top" aria-label="VoiceClaw"><img src="assets/voiceclaw-logo.svg" alt="VoiceClaw"></a>
+    <span>Ontario, Canada</span>
   </div>
 </footer>
 
 <script>
 (function () {
+  // the phone plays scenarios. the composer at the bottom offers the next question, cycles on its own, and sends on tap.
   var SCENARIOS = [
-    [ { t: 'user',   text: 'Did the Henderson invoice go out?' },
+    [ { t: 'user',   text: 'What jobs are still open from last week?' },
+      { t: 'lookup', text: 'checked · work orders + shop board' },
+      { t: 'bot',    lbl: 'Open work orders · last week', big: '3 open', text: 'Unit 214 brake job (Mike), the Kowalski trailer inspection, and a road call in Barrie with no parts logged yet.' } ],
+    [ { t: 'user',   text: 'Where is the paperwork for that job?' },
+      { t: 'lookup', text: 'checked · files + photos' },
+      { t: 'bot',    lbl: 'Unit 214 · brake job', big: 'On file', text: 'Signed work order and two photos from Mike\'s phone, added Tuesday 4:12 pm. Safety certificate due Oct 14.' } ],
+    [ { t: 'user',   text: 'What did we quote them last time?' },
+      { t: 'lookup', text: 'checked · quotes + email' },
+      { t: 'bot',    lbl: 'Henderson Farms · quote, Mar 3', big: '$4,850', text: 'Reefer service, two units, parts included. Sent by email, never signed. Sandy can resend it.' } ],
+    [ { t: 'user',   text: 'Who owes us the most right now?' },
       { t: 'lookup', text: 'checked · accounting' },
-      { t: 'bot',    text: 'Went out Tuesday at $4,850. Paid this morning.' } ],
-    [ { t: 'user',   text: "What's actually ready to go out this week?" },
-      { t: 'lookup', text: 'checked · units + shop board' },
-      { t: 'bot',    text: 'Six ready, two waiting on parts, one overdue for its safety inspection since Friday.' } ],
-    [ { t: 'user',   text: 'When did we last service the Hendersons?' },
-      { t: 'lookup', text: 'checked · service history + files' },
-      { t: 'bot',    text: 'March 14. Photos and notes are in the file. You quoted $610 and it was paid on the spot.' } ]
+      { t: 'bot',    lbl: 'Receivables · today', big: '$18,200', text: 'Northgate Logistics, 74 days. Three invoices. Last payment came in June.' } ]
   ];
+  var chat = document.getElementById('chat');
+  var phone = document.getElementById('phone');
+  var state = document.getElementById('phoneState');
+  var composer = document.getElementById('composer');
+  var cq = document.getElementById('cq');
   var playing = false;
-  function el(cls, html) {
-    var d = document.createElement('div');
-    d.className = cls;
-    d.innerHTML = html;
-    return d;
-  }
+  var queue = [1, 2, 3];        // suggestions not yet sent
+  var current = null;           // scenario index sitting in the composer
+  var rotateTimer = null;
+  var MAX_BUBBLES = 6;          // keep the chat to the last two exchanges
+
+  function el(cls, html) { var d = document.createElement('div'); d.className = cls; d.innerHTML = html; return d; }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function trim() {
+    var kids = chat.children;
+    while (kids.length > MAX_BUBBLES) chat.removeChild(kids[0]);
+  }
+  function setSuggestion(i, animate) {
+    current = i;
+    var text = i === null ? 'Ask by voice or text' : SCENARIOS[i][0].text;
+    if (!animate) { cq.className = 'cq'; cq.textContent = text; return; }
+    cq.className = 'cq out';
+    setTimeout(function () { cq.textContent = text; cq.className = 'cq in'; }, 220);
+  }
+  function nextIndex() {
+    if (queue.length === 0) queue = [1, 2, 3];
+    var pos = current === null ? -1 : queue.indexOf(current);
+    return queue[(pos + 1) % queue.length];
+  }
+  function startRotate() {
+    stopRotate();
+    rotateTimer = setInterval(function () { if (!playing) setSuggestion(nextIndex(), true); }, 4200);
+  }
+  function stopRotate() { if (rotateTimer) { clearInterval(rotateTimer); rotateTimer = null; } }
+
   async function play(i) {
     if (playing) return;
-    playing = true;
-    var chat = document.getElementById('chat');
-    var hint = document.getElementById('chatHint');
-    if (hint) hint.remove();
-    var phone = document.getElementById('phone');
-    var state = document.getElementById('phoneState');
-    var btns = document.querySelectorAll('.ask-q');
-    phone.classList.add('live');
-    state.textContent = 'live';
-    btns.forEach(function (b) { b.disabled = true; });
+    playing = true; stopRotate();
+    composer.disabled = true;
+    phone.classList.add('live'); state.textContent = 'live';
     var steps = SCENARIOS[i];
     for (var s = 0; s < steps.length; s++) {
       var step = steps[s];
       if (step.t === 'user') {
-        chat.appendChild(el('bubble user', step.text));
-        chat.scrollTop = chat.scrollHeight;
-        await wait(750);
+        chat.appendChild(el('bubble user', esc(step.text))); trim();
+        chat.scrollTop = chat.scrollHeight; await wait(750);
       } else if (step.t === 'lookup') {
-        chat.appendChild(el('sys-lookup', '<span class="vdot"></span>' + step.text));
-        chat.scrollTop = chat.scrollHeight;
-        await wait(950);
+        chat.appendChild(el('sys-lookup', '<span class="vdot"></span>' + esc(step.text))); trim();
+        chat.scrollTop = chat.scrollHeight; await wait(950);
         var ty = el('typing', '<span></span><span></span><span></span>');
-        chat.appendChild(ty);
-        chat.scrollTop = chat.scrollHeight;
-        await wait(950);
-        ty.remove();
+        chat.appendChild(ty); chat.scrollTop = chat.scrollHeight; await wait(950); ty.remove();
       } else {
-        chat.appendChild(el('bubble bot', step.text));
+        chat.appendChild(el('bubble bot', '<span class="lbl">' + esc(step.lbl) + '</span><span class="big">' + esc(step.big) + '</span>' + esc(step.text))); trim();
         chat.scrollTop = chat.scrollHeight;
       }
     }
-    phone.classList.remove('live');
-    state.textContent = 'standby';
-    btns.forEach(function (b) { b.disabled = false; });
-    playing = false;
+    phone.classList.remove('live'); state.textContent = 'standby';
+    playing = false; composer.disabled = false;
+    queue = queue.filter(function (q) { return q !== i; });
+    setSuggestion(nextIndex(), true);
+    startRotate();
   }
-  document.querySelectorAll('.ask-q').forEach(function (b) {
-    b.addEventListener('click', function () { play(parseInt(b.dataset.scn, 10)); });
+
+  composer.addEventListener('click', function () {
+    if (playing || current === null) return;
+    var i = current;
+    cq.className = 'cq sent';                       // the suggestion lifts out of the box
+    setTimeout(function () { cq.textContent = ''; play(i); }, 260);
   });
-  window.addEventListener('load', function () { setTimeout(function () { play(0); }, 900); });
+
+  window.addEventListener('load', function () {
+    setSuggestion(null, false);
+    setTimeout(async function () {
+      await play(0);                                 // opening scenario, then the composer takes over
+    }, 900);
+  });
 })();
 </script>
 </body>

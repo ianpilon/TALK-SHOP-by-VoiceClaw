@@ -1,9 +1,11 @@
-# TALK SHOP by VoiceClaw
+# VoiceClaw business-memory site
 
-![TALK SHOP hero: The shop closes at 5. The paperwork doesn't.](screenshot.png)
+Single static page, no build step. Open `index.html` or serve the folder.
 
-Landing page for TALK SHOP, a managed service for owner-operated businesses (5 to 50 people) where the owner is still the one answering the phone. TALK SHOP connects the systems a business already runs (industry software, spreadsheets, files, paper) into one system the owner can ask questions in plain language.
+Placeholders to fill before launch:
+- Every "Book a 20-minute call" link goes to cal.com/ian-pilon/20min (same as the old Talk Shop site).
+- The hero demo answers are illustrative (Henderson Farms, Unit 214, Northgate Logistics).
+- Footer says "Ontario, Canada" only. Add legal name / contact if wanted.
 
-Positioning: the owner's problem is disconnection. The facts of the business are scattered across systems and people's heads, so every answer costs a phone call. TALK SHOP makes the business answerable.
-
-Single static page (`index.html`), no build step. Deployed with GitHub Pages from `main`.
+Copy source: trade-show banner work, 2026-09-10 (headline, claw line, question bank, quotes).
+Positioning: homepage = "the How page" (Anthony Pierri): what it is and how it works. Problem POV stays short; outcomes and pricing numbers stay on the call.
