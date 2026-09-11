@@ -1,0 +1,40 @@
+# VoiceClaw
+> A managed business memory you can talk to.
+
+## What VoiceClaw is
+VoiceClaw is a managed business memory for owner-operators. Ask about any asset, customer, or job and get an answer by voice or text instead of chasing people. VoiceClaw is a managed service, not software: the VoiceClaw team builds it, runs it, and keeps it current. It is a layer on top of the systems a business already runs, not a replacement for them. It is memory, not reception: it answers the owner, it does not answer the phone.
+
+## The problem it solves
+If you own a small operation, you are the filing system. The answer to almost any question is in a text thread, a spreadsheet, a PDF in a shared drive, or the head of whoever did the job. So owners chase people: call the tech, text the office, wait. Not because the information does not exist, but because it is scattered across everything they run.
+
+## How it works
+1. We pull it out. VoiceClaw connects to the systems the business already runs and gets the data out, including legacy job and accounting software with no export. Sources: legacy job and accounting software, spreadsheets, texts and emails, signed documents and photos.
+2. It becomes one memory. Every asset, every customer, every job gets one record with its history attached. New work flows in from the shop floor as it happens, so nobody re-types anything. The memory can run on a machine in the customer's own building.
+3. You ask, it answers. Ask out loud or by text, from the truck or the desk. It answers in seconds with the source record shown, so the answer can be checked. Access controls for staff.
+
+## What it answers
+Jobs: What jobs are still open from last week? Who did the last job at that address? Did that get done? What did that job cost us?
+Paperwork: Where is the paperwork for that job? What expires this month? Is that contract signed? Where is the certificate for that unit?
+Money and customers: What did we quote them last time? Who owes us the most right now? When did we last do work for them? Which customers have gone quiet?
+
+## What it sits on
+A layer on top of what the business already runs. Job and work-order software, accounting and invoicing, document signing, shared drives, spreadsheets, texts, and photos all stay. VoiceClaw reads from them and writes back where it helps. Nobody learns a new system on day one. If a system is holding the business back, the owner decides whether to replace it, with the data already in hand.
+
+## Who it is for
+A good fit: you own and run the business with a crew of five to fifty; you service, rent, lease, or maintain physical things such as equipment, vehicles, trailers, properties, or tools; your records live in three or more places and one of them is a person; you want it handled, not another piece of software to administer.
+Not a fit yet: you want software to install and run yourself; your data already lives in one modern system that answers your questions; you are looking for a phone-answering service.
+
+## How the engagement works
+First 90 days, Foundation: VoiceClaw maps every system the business runs, gets the data out, fixes where it goes missing on the way in, and takes one real asset end to end. The owner tests it before anything else is built.
+Then, Managed monthly: VoiceClaw keeps the memory current, adds the questions the owner needs next, and stays on call. Fixed pilot fee, then a flat monthly fee. Pricing is discussed on the call, not published.
+Always, Your data, your building: the memory can run on a machine in the customer's office. Nothing leaves unless the owner decides it should. Hosting elsewhere is the owner's call.
+
+## Proof
+Built first for a reefer trailer leasing and service company in Ontario. Fourteen years of work orders, parts, invoices, and rentals were clawed out of a legacy system that had no export and put in front of the owner as one memory he can ask. First customer, engagement ongoing. References on request.
+
+## Company
+VoiceClaw Inc. Founder: Ian Pilon. Ontario, Canada.
+- Website: https://voiceclaw.ca
+- Book a 20-minute call: https://cal.com/ian-pilon/20min
+- LinkedIn: https://www.linkedin.com/company/voiceclaw
+- Brand guide: https://voiceclaw.ca/brand/

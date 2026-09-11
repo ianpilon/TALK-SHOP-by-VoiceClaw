@@ -1,0 +1,18 @@
+# VoiceClaw
+> A managed business memory you can talk to. VoiceClaw pulls the records of an owner-operated service business out of its scattered systems, keeps them as one memory, and answers questions about any asset, customer, or job by voice or text. Managed service, not software. Based in Ontario, Canada.
+
+## Main Pages
+- [Home](https://voiceclaw.ca/): What VoiceClaw is, how it works, what it answers, who it is for, how the engagement runs.
+- [How it works](https://voiceclaw.ca/#how): We pull the data out, it becomes one memory, you ask and it answers.
+- [What it answers](https://voiceclaw.ca/#answers): The jobs, paperwork, and money questions owners chase people for today.
+- [Who it is for](https://voiceclaw.ca/#who): Owner-operators with a crew of five to fifty who service, rent, lease, or maintain physical things. Includes who it is not for.
+- [How we work](https://voiceclaw.ca/#engage): A 90-day foundation, then a managed monthly service. Data can stay in the customer's own building.
+
+## Brand
+- [Brand and voice guide](https://voiceclaw.ca/brand/): Colour, type, components, and the words VoiceClaw uses.
+
+## Contact
+- Website: https://voiceclaw.ca
+- Book a 20-minute call: https://cal.com/ian-pilon/20min
+- LinkedIn: https://www.linkedin.com/company/voiceclaw
+- Location: Ontario, Canada

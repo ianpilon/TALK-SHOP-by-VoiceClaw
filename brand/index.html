@@ -1,0 +1,434 @@
+<title>VoiceClaw Brand Guide</title>
+<meta name="description" content="How VoiceClaw looks, sounds, and behaves. Colour, type, glow, components, and the words we use.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="voiceclaw-tokens.css">
+<style>
+  html{color-scheme:dark}
+  body{margin:0;background:#0d1126;color:#f3f5ff;font-family:Inter,system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:clamp(20px,4vw,48px)}
+  *{box-sizing:border-box}
+  a{color:var(--vc-accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:5px;padding:2px 6px;color:var(--vc-ink-2)}
+  pre{background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13px;line-height:1.5;color:var(--vc-ink-2);margin:0}
+  pre code{background:none;border:0;padding:0;font-size:inherit}
+
+  /* Guide chrome */
+  .toc{position:sticky;top:0;z-index:5;background:rgba(13,17,38,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--vc-line);margin-inline:calc(-1 * clamp(20px,4vw,48px));padding-inline:clamp(20px,4vw,48px)}
+  .toc .wrap{display:flex;align-items:center;gap:22px;height:56px;overflow-x:auto;white-space:nowrap}
+  .toc img{height:18px;width:auto;flex:none}
+  .toc a{color:var(--vc-muted);font-size:13.5px}
+  .toc a:hover{color:var(--vc-ink);text-decoration:none}
+  .toc .v{margin-left:auto;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vc-muted)}
+
+  .cover{position:relative;padding-block:84px 72px;border-bottom:1px solid var(--vc-line)}
+  .cover::before{content:"";position:absolute;inset:0 calc(-1 * clamp(20px,4vw,48px));background:radial-gradient(60% 60% at 15% 0%,#1c2350 0%,transparent 70%);pointer-events:none}
+  .cover .wrap{position:relative}
+  .cover h1{max-width:14ch}
+  .cover .lead{max-width:56ch;margin:26px 0 0}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:38px;font-size:13px;color:var(--vc-muted)}
+  .cover .meta b{color:var(--vc-ink-2);font-weight:500}
+
+  section{padding-block:72px;border-bottom:1px solid var(--vc-line)}
+  section:last-of-type{border-bottom:0}
+  section h2{margin-bottom:14px}
+  section > .wrap > p.lead{margin:0 0 36px;max-width:60ch}
+  .rule{color:var(--vc-ink-2);max-width:62ch;margin:0}
+  .rule + .rule{margin-top:10px}
+  .rule b{color:var(--vc-ink);font-weight:500}
+  .grid{display:grid;gap:28px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+  .sub{margin:44px 0 16px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--vc-muted);font-weight:500}
+  .sub:first-of-type{margin-top:0}
+
+  /* Swatches */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .sw{border-radius:14px;overflow:hidden;border:1px solid var(--vc-line);background:var(--vc-surface)}
+  .sw i{display:block;height:84px}
+  .sw div{padding:10px 12px 12px}
+  .sw b{display:block;font-size:13.5px;font-weight:500}
+  .sw code{display:inline-block;margin-top:4px;font-size:11.5px;padding:1px 5px}
+  .sw small{display:block;color:var(--vc-muted);font-size:12px;margin-top:6px;line-height:1.35}
+  .sw.rejected i{position:relative}
+  .sw.rejected i::after{content:"rejected";position:absolute;inset:auto 8px 8px auto;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:rgba(13,17,38,.85);color:#f3f5ff;padding:3px 7px;border-radius:999px}
+
+  /* Type specimens */
+  .spec{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:baseline;padding:18px 0;border-top:1px solid var(--vc-line)}
+  .spec:last-child{border-bottom:1px solid var(--vc-line)}
+  .spec .k{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vc-muted);line-height:1.5}
+  .spec .k code{display:block;margin-top:4px;text-transform:none;letter-spacing:0;font-size:11px;white-space:normal}
+  @media (max-width:640px){.spec{grid-template-columns:1fr;gap:8px}}
+
+  /* Demo stage */
+  .stage{background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:16px;padding:28px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+  .stage.col{flex-direction:column;align-items:stretch}
+  .stage.ground{background:var(--vc-ground)}
+  .chat{display:flex;flex-direction:column;gap:10px;max-width:360px}
+  .chip{align-self:flex-start;font-size:11px;color:var(--vc-muted);padding:3px 9px;border:1px solid var(--vc-line);border-radius:999px;display:inline-flex;gap:7px;align-items:center}
+  .cap{font-size:13px;color:var(--vc-muted);margin:10px 0 0;max-width:62ch}
+
+  /* Voice tables */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-top:1px solid var(--vc-line)}
+  th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vc-muted);font-weight:500;border-top:0;padding-top:0}
+  td.no{color:var(--vc-muted);text-decoration:line-through;text-decoration-color:rgba(248,113,113,.7)}
+  td.yes{color:var(--vc-ink)}
+  td.why{color:var(--vc-muted);font-size:14px}
+  .tablewrap{overflow-x:auto}
+  .pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+  .ex{border-radius:14px;padding:18px 20px;background:var(--vc-surface);border:1px solid var(--vc-line)}
+  .ex .t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:10px}
+  .ex.good .t{color:var(--vc-accent)}
+  .ex.bad .t{color:var(--vc-down)}
+  .ex p{margin:0;color:var(--vc-ink-2);font-size:15.5px}
+  .ex p + p{margin-top:8px}
+  .ex .note{font-size:13px;color:var(--vc-muted);margin-top:12px;padding-top:10px;border-top:1px solid var(--vc-line)}
+  .principles{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+  .principles h3{margin-bottom:8px}
+  .principles p{margin:0;color:var(--vc-ink-2);font-size:15.5px}
+  .principles .q{display:block;margin-top:10px;color:var(--vc-muted);font-size:14px;font-style:italic}
+
+  /* Do / don't */
+  .dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px}
+  .dd ul{margin:0;padding:0;list-style:none}
+  .dd li{padding:9px 0 9px 22px;position:relative;color:var(--vc-ink-2);font-size:15.5px;border-top:1px solid var(--vc-line)}
+  .dd li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;border-radius:50%}
+  .dd .do li::before{background:var(--vc-accent);box-shadow:0 0 8px 1px var(--vc-glow)}
+  .dd .dont li::before{background:var(--vc-down)}
+
+  /* Logo stage */
+  .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+  .logo{border-radius:16px;border:1px solid var(--vc-line);display:flex;align-items:center;justify-content:center;padding:44px 36px;min-height:170px}
+  .logo img{width:min(100%,260px);height:auto}
+  .logo.g{background:var(--vc-ground)}
+  .logo.s{background:var(--vc-surface)}
+  .logo.c{background:var(--vc-accent)}
+  .logo.c img{filter:brightness(0) saturate(100%) invert(9%) sepia(37%) saturate(1400%) hue-rotate(160deg)}
+
+  footer{padding-block:40px 60px;color:var(--vc-muted);font-size:13px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<nav class="toc"><div class="wrap">
+  <img src="voiceclaw-logo.svg" alt="VoiceClaw">
+  <a href="#essence">Essence</a><a href="#logo">Logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#glow">Glow</a><a href="#components">Components</a><a href="#layout">Layout</a><a href="#voice">Voice</a><a href="#writing">Writing rules</a><a href="#demo">Demo content</a><a href="#never">Never</a><a href="#files">Files</a>
+  <span class="v">v1 · Sep 2026</span>
+</div></nav>
+
+<header class="cover"><div class="wrap vc">
+  <span class="kicker">Brand and voice guide</span>
+  <h1>How VoiceClaw looks, sounds, and <em class="hl">behaves.</em></h1>
+  <p class="lead">One reference for every VoiceClaw surface: the website, the trade-show banners, the LinkedIn page, the product, and any app that comes next. Every value here is lifted from what is already live, so following this guide keeps new work matching old work.</p>
+  <div class="meta">
+    <span><b>Version</b> 1, written 2026-09-11</span>
+    <span><b>Sources</b> voiceclaw.ca, trade-show sketches, LinkedIn cover, the product one-liner</span>
+    <span><b>Owner</b> Ian Pilon</span>
+  </div>
+</div></header>
+
+<section id="essence"><div class="wrap vc">
+  <h2>Essence</h2>
+  <p class="lead">Before any colour or word: what VoiceClaw is, who it is for, and the one idea everything hangs on.</p>
+  <div class="grid g2">
+    <div>
+      <div class="sub">What it is</div>
+      <p class="rule"><b>A managed business memory you can talk to.</b> Ask about any asset, customer, or job and get an answer by voice or text instead of chasing people.</p>
+      <p class="rule">That sentence is final. Use it verbatim as the product description everywhere: hero, LinkedIn About, decks, proposals.</p>
+      <div class="sub">Who it is for</div>
+      <p class="rule"><b>Owner-operators who are the filing system.</b> They own and run a business with a crew of five to fifty that services, rents, leases, or maintains physical things. Their records live in three or more places, and one of those places is a person.</p>
+    </div>
+    <div>
+      <div class="sub">The one idea</div>
+      <p class="rule"><b>The answers were buried. We did the digging.</b> The data was never easy to get. It was scattered across old software, texts, PDFs, and people's heads, and we clawed it out. Now every answer is a question away.</p>
+      <p class="rule">"Claw" is a deliberate brand plant. Use it as a verb ("clawed out of a legacy system") when the point is that we did hard work nobody else would.</p>
+      <div class="sub">Three positioning lines</div>
+      <p class="rule"><b>A managed service, not software.</b> We build it, we run it, you ask it.</p>
+      <p class="rule"><b>A layer, not a replacement.</b> Everything they already run stays.</p>
+      <p class="rule"><b>Memory, not reception.</b> It answers the owner. It does not answer the phone.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="logo"><div class="wrap vc">
+  <h2>Logo</h2>
+  <p class="lead">The VoiceClaw wordmark is the company identity. The product itself has no name yet, so the wordmark carries every surface.</p>
+  <div class="logos">
+    <div class="logo g"><img src="voiceclaw-logo.svg" alt="VoiceClaw wordmark on navy"></div>
+    <div class="logo s"><img src="voiceclaw-logo.svg" alt="VoiceClaw wordmark on surface navy"></div>
+    <div class="logo c"><img src="voiceclaw-logo.svg" alt="VoiceClaw wordmark on cyan"></div>
+  </div>
+  <div class="grid g2" style="margin-top:28px">
+    <p class="rule"><b>Colour.</b> The mark is a single flat colour. Ink white on navy is the default. On a cyan field use accent ink (the dark teal used for text on cyan buttons). Never cyan on navy for the logo: cyan is reserved for the one highlighted phrase and for glow.</p>
+    <p class="rule"><b>Space and size.</b> Keep clear space around it equal to the height of the letters. In a nav it sits at 18 to 22 px tall. On LinkedIn the profile image overlays the bottom-left of any cover, so keep that corner empty of text.</p>
+  </div>
+</div></section>
+
+<section id="colour"><div class="wrap vc">
+  <h2>Colour</h2>
+  <p class="lead">Dark first, always. Deep navy surfaces, one electric cyan accent, and nothing warm. Elevation comes from a lighter surface, never from a heavier border.</p>
+  <div class="sub">Ground and surfaces</div>
+  <div class="swatches">
+    <div class="sw"><i style="background:#0d1126"></i><div><b>Ground</b><code>#0d1126</code><small>Page background. Every VoiceClaw surface starts here.</small></div></div>
+    <div class="sw"><i style="background:#141936"></i><div><b>Surface</b><code>#141936</code><small>Panels, code blocks, the phone screen's ground.</small></div></div>
+    <div class="sw"><i style="background:#1a2040"></i><div><b>Raised</b><code>#1a2040</code><small>Inputs, answer bubbles, anything that sits on a surface.</small></div></div>
+    <div class="sw"><i style="background:#1c2350"></i><div><b>Lift</b><code>#1c2350</code><small>Only as a radial gradient behind a hero, fading to transparent.</small></div></div>
+    <div class="sw"><i style="background:#0d1126;box-shadow:inset 0 0 0 1px rgba(138,147,184,.18)"></i><div><b>Line</b><code>rgba(138,147,184,.18)</code><small>The only border colour. Use it sparingly.</small></div></div>
+  </div>
+  <div class="sub">Ink</div>
+  <div class="swatches">
+    <div class="sw"><i style="background:#f3f5ff"></i><div><b>Ink</b><code>#f3f5ff</code><small>Headlines, primary text, the logo.</small></div></div>
+    <div class="sw"><i style="background:#c9cee6"></i><div><b>Ink 2</b><code>#c9cee6</code><small>Lead paragraphs, body text on long pages, ghost buttons.</small></div></div>
+    <div class="sw"><i style="background:#8a93b8"></i><div><b>Muted</b><code>#8a93b8</code><small>Labels, captions, placeholders, the quietest text.</small></div></div>
+  </div>
+  <div class="sub">The accent</div>
+  <div class="swatches">
+    <div class="sw"><i style="background:#22d3ee"></i><div><b>Cyan</b><code>#22d3ee</code><small>The one accent. Highlighted phrase, primary button, dots, numerals, glow.</small></div></div>
+    <div class="sw"><i style="background:#06202a"></i><div><b>Accent ink</b><code>#06202a</code><small>Text on a cyan fill. Never white on cyan.</small></div></div>
+    <div class="sw"><i style="background:radial-gradient(circle at 50% 50%,rgba(34,211,238,.45),rgba(34,211,238,0) 70%),#0d1126"></i><div><b>Glow</b><code>rgba(34,211,238,.45)</code><small>Text shadow and box shadow colour. Soft version at .12 for focus rings.</small></div></div>
+    <div class="sw"><i style="background:#0d1126;display:flex"><span style="margin:auto;font-size:15px"><span style="color:#34d399">▲ +1%</span>&nbsp;&nbsp;<span style="color:#f87171">▼ -3%</span></span></i><div><b>Up / down</b><code>#34d399 / #f87171</code><small>Only next to a number. Never a field, never a button.</small></div></div>
+    <div class="sw rejected"><i style="background:#f5511d"></i><div><b>Orange</b><code>#f5511d</code><small>Tried on the trade-show banner and rejected. Warm accents are out.</small></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:36px">
+    <p class="rule"><b>One accent per surface.</b> Cyan is it. If a page needs a second emphasis colour, the hierarchy is wrong, not the palette.</p>
+    <p class="rule"><b>No light theme.</b> VoiceClaw is dark only. Paint the ground explicitly on every surface so it holds on any host.</p>
+  </div>
+</div></section>
+
+<section id="type"><div class="wrap vc">
+  <h2>Type</h2>
+  <p class="lead">Inter everywhere. Headlines are medium weight and tight. Numbers get the stage at light weight. Labels stay small, uppercase, and spaced.</p>
+  <div class="spec"><div class="k">Headline<code>500 · clamp(38px,6vw,68px) · 1.02 · -.025em</code></div><h1 style="font-size:52px">A managed business memory you can <em class="hl">talk to.</em></h1></div>
+  <div class="spec"><div class="k">Section title<code>500 · clamp(28px,4vw,42px) · 1.08 · -.025em</code></div><h2>Still chasing people for <em class="hl">answers?</em></h2></div>
+  <div class="spec"><div class="k">Subhead<code>500 · 20px · -.01em</code></div><h3>Owner-operators who are the filing system.</h3></div>
+  <div class="spec"><div class="k">Lead<code>400 · clamp(18px,2vw,21px) · ink 2</code></div><p class="lead" style="margin:0">Ask about any asset, customer, or job and get an answer by voice or text instead of chasing people.</p></div>
+  <div class="spec"><div class="k">Body<code>400 · 17px · 1.55</code></div><p style="margin:0;max-width:62ch">If you own a small operation, you are the filing system. The answer to almost any question is in a text thread, a spreadsheet, a PDF in Dropbox, or the head of whoever did the job.</p></div>
+  <div class="spec"><div class="k">Kicker<code>500 · 12px · .16em · uppercase · cyan</code></div><span class="kicker" style="margin:0">For owner-operators</span></div>
+  <div class="spec"><div class="k">Label<code>400 · 11.5px · .08em · uppercase · muted</code></div><span class="label">Open work orders · last week</span></div>
+  <div class="spec"><div class="k">Numeral<code>300 · 44px · -.03em · cyan + glow</code></div><span class="numeral">3 open</span></div>
+  <div class="grid g2" style="margin-top:36px">
+    <p class="rule"><b>The highlighted phrase.</b> One phrase per headline turns cyan with a glow: the payoff word, not the subject. "talk to." "answers?" "behaves." Never two phrases, never a whole line.</p>
+    <p class="rule"><b>Weight rules.</b> 500 for headings and buttons, 400 for text, 300 for big numbers only. Nothing bold. Emphasis comes from colour and size, not weight.</p>
+  </div>
+</div></section>
+
+<section id="glow"><div class="wrap vc">
+  <h2>Glow and depth</h2>
+  <p class="lead">Glow is the signature. It marks what is live, what is the answer, and what matters. Depth comes from surface lightness and soft shadows, not from lines.</p>
+  <div class="stage ground">
+    <span class="dot live"></span>
+    <span class="numeral" style="font-size:36px">$18,200</span>
+    <em class="hl" style="font-size:24px;font-weight:500;letter-spacing:-.02em">a question away</em>
+    <a class="btn primary" href="#glow">Book a 20-minute call</a>
+    <label class="composer" style="min-width:260px"><span class="dot"></span><input id="glow-composer" type="text" placeholder="Ask by voice or text"></label>
+  </div>
+  <p class="cap">Three glow recipes cover everything: text-shadow for a phrase or numeral, box-shadow for a dot, and a ring at the soft glow value for a focused or hovered input.</p>
+  <div class="grid g3" style="margin-top:28px">
+    <pre><code>/* phrase or numeral */
+color: var(--vc-accent);
+text-shadow: 0 0 26px var(--vc-glow);</code></pre>
+    <pre><code>/* live dot, bullet, mic */
+background: var(--vc-accent);
+box-shadow: 0 0 10px 2px var(--vc-glow);</code></pre>
+    <pre><code>/* focus or hover ring */
+border-color: var(--vc-accent);
+box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
+  </div>
+  <div class="grid g2" style="margin-top:36px">
+    <p class="rule"><b>Shadows are soft and large.</b> The phone panel uses <code>0 32px 64px -24px rgba(0,0,0,.75)</code>. A hovered primary button lifts one pixel and casts <code>0 10px 30px -10px</code> of glow. No hard edges, no 1 px borders on everything.</p>
+    <p class="rule"><b>The hero lift.</b> Behind a hero, a radial gradient of Lift at the top-left corner fading to nothing. It reads as a light source, not a decoration. Once per page.</p>
+  </div>
+</div></section>
+
+<section id="components"><div class="wrap vc">
+  <h2>Components</h2>
+  <p class="lead">The pieces that already exist, rendered live from the tokens file. Reuse them before inventing anything.</p>
+
+  <div class="sub">Buttons</div>
+  <div class="stage">
+    <a class="btn primary" href="#components">Book a 20-minute call</a>
+    <a class="btn ghost" href="#components">See how it works</a>
+    <span style="color:var(--vc-muted);font-size:13px">We run it for you. Nothing to install, nothing to replace.</span>
+  </div>
+  <p class="cap">Pills, always. One primary per view. The ghost button is a line, never a fill. A small muted line under the buttons carries the reassurance.</p>
+
+  <div class="sub">The answer</div>
+  <div class="stage">
+    <div class="chat">
+      <div class="bubble user">What did we quote them last time?</div>
+      <span class="chip"><span class="dot" style="width:5px;height:5px"></span>checked · quotes + email</span>
+      <div class="bubble bot"><span class="lbl">Henderson Farms · quote, Mar 3</span><span class="big">$4,850</span>Reefer service, two units, parts included. Sent by email, never signed. Sandy can resend it.</div>
+    </div>
+    <div style="flex:1;min-width:240px">
+      <p class="rule"><b>Anatomy of an answer.</b> A question in cyan. A lookup chip that names where it looked. Then the answer: a small label naming the record, one big light number or state, and one sentence of detail with a name and a date in it.</p>
+      <p class="rule">The big value is the answer. The sentence is the proof. Together they let the owner check it without opening anything.</p>
+    </div>
+  </div>
+
+  <div class="sub">Composer</div>
+  <div class="stage">
+    <label class="composer" style="flex:1;min-width:260px;max-width:420px"><span class="dot"></span><input id="demo-composer" type="text" placeholder="Where is the paperwork for that job?"></label>
+    <p class="rule" style="flex:1;min-width:240px">One pill input with a glowing mic dot. The placeholder is a real question, never "Type here". On the site it cycles a suggested question every 4.2 seconds and sends it on tap.</p>
+  </div>
+
+  <div class="sub">Steps and lists</div>
+  <div class="stage" style="align-items:flex-start">
+    <div style="flex:1;min-width:200px"><span class="numeral">1</span><h3 style="margin:14px 0 8px">We pull it out</h3><p class="rule" style="font-size:15px">We connect to the systems you already run and get the data out, including the old software nobody can export from.</p></div>
+    <div style="flex:1;min-width:200px"><span class="numeral">2</span><h3 style="margin:14px 0 8px">It becomes one memory</h3><p class="rule" style="font-size:15px">Every asset, every customer, every job gets one record, with its history attached.</p></div>
+    <div style="flex:1;min-width:200px"><span class="numeral">3</span><h3 style="margin:14px 0 8px">You ask, it answers</h3><p class="rule" style="font-size:15px">Ask out loud or by text, the way you would ask a person. It answers in seconds with the record behind it.</p></div>
+  </div>
+  <p class="cap">Numbers are used only where order is real. Bullet dots are tiny cyan glow dots, not discs or checkmarks.</p>
+</div></section>
+
+<section id="layout"><div class="wrap vc">
+  <h2>Layout</h2>
+  <p class="lead">Mobile first, one column that grows to two. Calm density: room inside every block, muted secondary text, and almost no boxes.</p>
+  <div class="grid g2">
+    <div>
+      <p class="rule"><b>Measure.</b> Content maxes at 1120 px with a side gutter of <code>clamp(20px,4vw,48px)</code>. Running text stays under about 62 characters.</p>
+      <p class="rule"><b>Rhythm.</b> Sections are separated by generous padding and, at most, one hairline. Inside a section, kicker, then title, then lead, then the content.</p>
+      <p class="rule"><b>Radii.</b> 5 px chips and bubble tails, 16 px panels, 17 px bubbles, 42 px the phone, 999 px pills and inputs.</p>
+    </div>
+    <div>
+      <p class="rule"><b>Not everything is a card.</b> On the website the only bordered panel is the phone demo. Lists, steps, and fit columns sit directly on the ground and are separated by space.</p>
+      <p class="rule"><b>Motion.</b> Small and purposeful: a 1.4 s pulse on a live dot, a single border pulse when a suggestion lands, a 0.18 s pop on a new bubble. Every animation is off under reduced motion.</p>
+      <p class="rule"><b>Verify at two widths.</b> 1280 and 390. No horizontal scroll at either.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="voice"><div class="wrap vc">
+  <h2>Voice</h2>
+  <p class="lead">VoiceClaw sounds like a straight-talking operator who has done the digging and is telling you what they found. Plain, specific, on the owner's side, and honest about limits.</p>
+  <div class="principles">
+    <div><h3>Plain English</h3><p>Words an owner-operator uses at the shop. No industry, startup, or software jargon. If a specialist term is unavoidable, say what it means the first time.</p><span class="q">"Get the data out, including the old software nobody can export from."</span></div>
+    <div><h3>From the owner's side</h3><p>Write from where they sit: the truck, the desk, the phone that will not stop. Name the pain the way they say it, in their own quoted excuses.</p><span class="q">"I'd have to check." "Let me get back to you." "It's in a text somewhere."</span></div>
+    <div><h3>Concrete over clever</h3><p>Real questions, real nouns, real numbers with names and dates. A question they asked someone this week beats any benefit statement.</p><span class="q">"What did we quote them last time?"</span></div>
+    <div><h3>We did the digging</h3><p>Never imply the data was easy to get. The answers were buried and we clawed them out. Claim the work, not the magic.</p><span class="q">"Fourteen years of work orders clawed out of a legacy system that had no export."</span></div>
+    <div><h3>Honest about limits</h3><p>Say who it is not for. Say numbers belong on the call. Say the first customer is still an engagement in progress. Trust is the sale.</p><span class="q">"We will tell you honestly whether your data can be clawed out, and what it would take."</span></div>
+    <div><h3>Calm confidence</h3><p>Short sentences. No exclamation marks. Fewer words on a wall read as confidence, not a gap. Let the answer do the talking.</p><span class="q">"Now your business answers. Out loud, in seconds."</span></div>
+  </div>
+
+  <div class="sub">Tone by surface</div>
+  <div class="tablewrap"><table>
+    <tr><th style="width:22%">Surface</th><th style="width:38%">Tone</th><th>Example</th></tr>
+    <tr><td>Headline, banner</td><td>A question the owner asks themselves, or the twist line. One cyan word.</td><td>Still chasing people for answers?</td></tr>
+    <tr><td>Product description</td><td>The final one-liner, verbatim.</td><td>A managed business memory you can talk to.</td></tr>
+    <tr><td>Product answer</td><td>Label, big value, one sentence with a name and a date. Names the source it checked.</td><td>Unit 214 · brake job. On file. Signed work order and two photos from Mike's phone, added Tuesday 4:12 pm.</td></tr>
+    <tr><td>Call to action</td><td>Low pressure, specific ask, a promise of honesty.</td><td>Twenty minutes. Bring the three questions you asked someone this week.</td></tr>
+    <tr><td>Pricing</td><td>Structure yes, numbers no.</td><td>Fixed pilot fee, then a flat monthly fee. Numbers on the call, not on a pricing page.</td></tr>
+    <tr><td>Empty state, error</td><td>Say what it checked and what to do. No apology, no blame.</td><td>Nothing on file for that unit yet. Ask Mike to add the work order from his phone.</td></tr>
+  </table></div>
+</div></section>
+
+<section id="writing"><div class="wrap vc">
+  <h2>Writing rules</h2>
+  <p class="lead">The vocabulary is locked. These came out of real edits, and each one has a reason.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:26%">Say</th><th style="width:26%">Not</th><th>Why</th></tr>
+    <tr><td class="yes">business memory</td><td class="no">second brain</td><td class="why">Customers do not know the term. It sounds like a productivity app.</td></tr>
+    <tr><td class="yes">business memory</td><td class="no">operations memory</td><td class="why">Broader than the shop. It covers customers, money, paperwork.</td></tr>
+    <tr><td class="yes">one record, with its history attached</td><td class="no">queryable, one queryable record</td><td class="why">Database talk. Owners do not query, they ask.</td></tr>
+    <tr><td class="yes">a managed memory</td><td class="no">everything in one place</td><td class="why">"Managed memory" already implies one place. Do not say it twice.</td></tr>
+    <tr><td class="yes">asset, customer, job</td><td class="no">trailer, unit, work order (in generic copy)</td><td class="why">The nouns must fit every owner-operator, not only reefer trailers. Use the specific words only in customer-specific documents.</td></tr>
+    <tr><td class="yes">paperwork</td><td class="no">file, document, record (when meaning the papers)</td><td class="why">It is the word they use when they are looking for it.</td></tr>
+    <tr><td class="yes">owner-operator</td><td class="no">SMB, small business owner, user</td><td class="why">It names the person who is the filing system.</td></tr>
+    <tr><td class="yes">a managed service</td><td class="no">software, platform, SaaS, app</td><td class="why">We run it. They ask it. Nothing to install or administer.</td></tr>
+    <tr><td class="yes">a layer on top of what you run</td><td class="no">replace, migrate, rip and replace</td><td class="why">Everything stays. Replacing is their later decision, with the data in hand.</td></tr>
+    <tr><td class="yes">clawed out, we did the digging</td><td class="no">your business already knows, unlock, surface</td><td class="why">The data was never easy to get. Claim the work.</td></tr>
+    <tr><td class="yes">memory, not reception</td><td class="no">phone agent, receptionist, answering service</td><td class="why">It answers the owner, not the phone. Keep the older VoiceClaw phone-agent framing out of this product.</td></tr>
+    <tr><td class="yes">ask, out loud or by text</td><td class="no">chat with your data, AI assistant, chatbot</td><td class="why">Say what they do, not what the technology is called. "AI" appears only when someone asks.</td></tr>
+  </table></div>
+
+  <div class="sub">Punctuation and shape</div>
+  <div class="grid g2">
+    <div>
+      <p class="rule"><b>No em dashes, ever.</b> Periods, commas, and colons instead. Readers now read the long dash as a machine tell.</p>
+      <p class="rule"><b>Short sentences.</b> One idea each. Fragments are fine on a banner. "Then you ask."</p>
+      <p class="rule"><b>Numbers as words in prose</b> ("five to fifty", "fourteen years"). Digits only inside a product answer, where the number is the point.</p>
+    </div>
+    <div>
+      <p class="rule"><b>Questions in threes.</b> The problem is shown as three real questions: jobs, paperwork, money. Keep that order when you reuse the pattern.</p>
+      <p class="rule"><b>Quote the excuses.</b> The three excuses in quotation marks stack from bright to muted. It is the only place the site uses quotation marks as a design element.</p>
+      <p class="rule"><b>No exclamation marks, no superlatives.</b> "Simple", "powerful", "seamless", "revolutionary" do not appear anywhere.</p>
+    </div>
+  </div>
+
+  <div class="sub">Before and after</div>
+  <div class="pair">
+    <div class="ex bad"><div class="t">Not this</div><p>VoiceClaw is an AI-powered second brain that unlocks the data your business already has, giving SMBs a single queryable source of truth across all their systems!</p><div class="note">Jargon, an exclamation mark, "second brain", "queryable", and it implies the data was sitting there ready.</div></div>
+    <div class="ex good"><div class="t">This</div><p>A managed business memory you can talk to. We claw the answers out of your scattered data. Then you ask.</p><div class="note">Plain, claims the work, and each sentence does one job.</div></div>
+    <div class="ex bad"><div class="t">Not this</div><p>Our platform seamlessly integrates with your existing tech stack, so there's no need for a costly migration.</p><div class="note">"Platform", "seamlessly", "tech stack", "migration". None of these words come out of an owner's mouth.</div></div>
+    <div class="ex good"><div class="t">This</div><p>Your job software, your accounting package, your document signing, your shared drive: they all stay. Nobody has to learn a new system on day one.</p><div class="note">Names the real things they run and promises the thing they fear losing.</div></div>
+  </div>
+</div></section>
+
+<section id="demo"><div class="wrap vc">
+  <h2>Demo content</h2>
+  <p class="lead">Every demo, screenshot, and sample answer uses the same fictional cast. Never a real customer, never real numbers from a real customer's books.</p>
+  <div class="tablewrap"><table>
+    <tr><th style="width:30%">Question</th><th style="width:22%">Looked in</th><th>Answer</th></tr>
+    <tr><td>What jobs are still open from last week?</td><td>work orders + shop board</td><td><b style="font-weight:500">3 open.</b> Unit 214 brake job (Mike), the Kowalski trailer inspection, and a road call in Barrie with no parts logged yet.</td></tr>
+    <tr><td>Where is the paperwork for that job?</td><td>files + photos</td><td><b style="font-weight:500">On file.</b> Signed work order and two photos from Mike's phone, added Tuesday 4:12 pm. Safety certificate due Oct 14.</td></tr>
+    <tr><td>What did we quote them last time?</td><td>quotes + email</td><td><b style="font-weight:500">$4,850.</b> Henderson Farms, Mar 3. Reefer service, two units, parts included. Sent by email, never signed. Sandy can resend it.</td></tr>
+    <tr><td>Who owes us the most right now?</td><td>accounting</td><td><b style="font-weight:500">$18,200.</b> Northgate Logistics, 74 days. Three invoices. Last payment came in June.</td></tr>
+  </table></div>
+  <p class="cap">The cast: Mike (tech), Sandy (office), Henderson Farms, Northgate Logistics, the Kowalski trailer, Unit 214, a road call in Barrie. Reuse them so demos feel like one business. The proof line about the first customer stays anonymous: "a reefer trailer leasing and service company in Ontario."</p>
+</div></section>
+
+<section id="never"><div class="wrap vc">
+  <h2>Do and never</h2>
+  <p class="lead">The short list to check any new surface against before it ships.</p>
+  <div class="dd">
+    <ul class="do">
+      <li>Start on navy. Paint the ground explicitly.</li>
+      <li>One cyan phrase per headline, with glow.</li>
+      <li>Inter, weight 500 for headings, 300 for big numbers.</li>
+      <li>Pills for buttons and inputs. One primary per view.</li>
+      <li>Glow to mark what is live and what is the answer.</li>
+      <li>Real questions as placeholders and examples.</li>
+      <li>The final one-liner, verbatim, as the description.</li>
+      <li>Say who it is not for.</li>
+      <li>Keep the LinkedIn cover's bottom-left corner empty.</li>
+      <li>Preview every iteration at a fresh filename.</li>
+    </ul>
+    <ul class="dont">
+      <li>No orange, no warm accent, no second accent.</li>
+      <li>No light theme. No grey or pure black grounds.</li>
+      <li>No purple-to-pink gradients, no glass blur panels.</li>
+      <li>No emoji as icons. No icon-in-a-circle feature cards.</li>
+      <li>No centred hero with three feature cards under it.</li>
+      <li>No bold weight. No exclamation marks.</li>
+      <li>No em dashes anywhere in outbound text.</li>
+      <li>No "second brain", "queryable", "platform", "AI-powered".</li>
+      <li>No real customer names or numbers in demos.</li>
+      <li>No prices on a page. Numbers on the call.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="files"><div class="wrap vc">
+  <h2>Files</h2>
+  <p class="lead">Where the truth lives and how to start a new surface in ten lines.</p>
+  <div class="grid g2">
+    <div>
+      <p class="rule"><b>Tokens.</b> <code>~/VoiceClaw/website/brand/voiceclaw-tokens.css</code>. Every variable and class used on this page comes from it. Link it, add <code>class="vc"</code> to the root element, and build on the variables.</p>
+      <p class="rule"><b>Logo.</b> <code>brand/voiceclaw-logo.svg</code>, single flat fill, recolour by changing the fill.</p>
+      <p class="rule"><b>Reference surfaces.</b> voiceclaw.ca (the site), the trade-show sketches in VoiceClaw/marketing/trade-show, the LinkedIn cover in VoiceClaw/marketing/linkedin-cover.</p>
+      <p class="rule"><b>Booking link.</b> Every call to action goes to <code>cal.com/ian-pilon/20min</code>.</p>
+    </div>
+    <pre><code>&lt;link rel="stylesheet" href="voiceclaw-tokens.css"&gt;
+&lt;body class="vc"&gt;
+  &lt;span class="kicker"&gt;For owner-operators&lt;/span&gt;
+  &lt;h1&gt;A managed business memory you can
+      &lt;em class="hl"&gt;talk to.&lt;/em&gt;&lt;/h1&gt;
+  &lt;p class="lead"&gt;Ask about any asset, customer, or job
+      and get an answer by voice or text instead of
+      chasing people.&lt;/p&gt;
+  &lt;a class="btn primary" href="https://cal.com/ian-pilon/20min"&gt;
+      Book a 20-minute call&lt;/a&gt;
+&lt;/body&gt;</code></pre>
+  </div>
+</div></section>
+
+<footer><div class="wrap">VoiceClaw brand and voice guide, version 1. Update this page when a rule changes, and bump the version in the top bar.</div></footer>

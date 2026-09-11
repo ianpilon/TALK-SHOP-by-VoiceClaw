@@ -1,0 +1,87 @@
+/* VoiceClaw brand tokens, v1 (2026-09-11).
+   Source of truth for every VoiceClaw surface. Values are lifted verbatim from voiceclaw.ca.
+   Drop this file into any app and build on the variables and classes below. Dark only. */
+
+:root{
+  /* Ground and surfaces. Elevation comes from lighter surface, never from heavier borders. */
+  --vc-ground:#0d1126;
+  --vc-surface:#141936;
+  --vc-raised:#1a2040;
+  --vc-lift:#1c2350;                       /* top-left radial lift behind a hero */
+  --vc-line:rgba(138,147,184,.18);         /* the only border colour */
+
+  /* Ink. */
+  --vc-ink:#f3f5ff;
+  --vc-ink-2:#c9cee6;
+  --vc-muted:#8a93b8;
+
+  /* The one accent. Cyan. Never a second accent, never a warm one. */
+  --vc-accent:#22d3ee;
+  --vc-accent-ink:#06202a;                 /* text on a cyan fill */
+  --vc-glow:rgba(34,211,238,.45);
+  --vc-glow-soft:rgba(34,211,238,.12);
+
+  /* Semantic, small and quiet, next to a number only. */
+  --vc-up:#34d399;
+  --vc-down:#f87171;
+
+  /* Type. */
+  --vc-font:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  /* Radii. */
+  --vc-r-chip:5px;
+  --vc-r-card:16px;
+  --vc-r-bubble:17px;
+  --vc-r-phone:42px;
+  --vc-r-pill:999px;
+
+  /* Layout. */
+  --vc-max:1120px;
+  --vc-gutter:clamp(20px,4vw,48px);
+}
+
+/* Base */
+.vc, .vc body{background:var(--vc-ground);color:var(--vc-ink);font-family:var(--vc-font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+
+/* Type scale */
+.vc h1,.vc h2,.vc h3{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance}
+.vc h1{font-size:clamp(38px,6vw,68px);line-height:1.02}
+.vc h2{font-size:clamp(28px,4vw,42px);line-height:1.08}
+.vc h3{font-size:20px;letter-spacing:-.01em}
+.vc .lead{font-size:clamp(18px,2vw,21px);color:var(--vc-ink-2);text-wrap:pretty}
+.vc .kicker{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--vc-accent);font-weight:500}
+.vc .label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vc-muted)}
+.vc .numeral{font-size:44px;font-weight:300;letter-spacing:-.03em;line-height:1;color:var(--vc-accent);text-shadow:0 0 22px var(--vc-glow)}
+.vc .hl{font-style:normal;color:var(--vc-accent);text-shadow:0 0 26px var(--vc-glow)}   /* one phrase per headline */
+
+/* Buttons */
+.vc .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--vc-r-pill);font-weight:500;font-size:15px;white-space:nowrap;text-decoration:none;cursor:pointer;border:0;font-family:inherit;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.vc .btn.primary{background:var(--vc-accent);color:var(--vc-accent-ink)}
+.vc .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--vc-glow)}
+.vc .btn.ghost{background:transparent;color:var(--vc-ink-2);border:1px solid var(--vc-line)}
+.vc .btn.ghost:hover{border-color:var(--vc-muted)}
+.vc .btn:focus-visible{outline:2px solid var(--vc-accent);outline-offset:3px}
+
+/* Input pill (the composer) */
+.vc .composer{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:var(--vc-r-pill);background:var(--vc-raised);border:1px solid var(--vc-line);color:var(--vc-ink);font:inherit;font-size:13.5px;transition:border-color .15s,box-shadow .15s}
+.vc .composer:hover,.vc .composer:focus-within{border-color:var(--vc-accent);box-shadow:0 0 0 3px var(--vc-glow-soft)}
+.vc .composer input{flex:1;background:none;border:0;color:var(--vc-ink);font:inherit;outline:0}
+.vc .composer input::placeholder{color:var(--vc-muted)}
+
+/* Glow dot (live, mic, bullet) */
+.vc .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--vc-accent);box-shadow:0 0 10px 2px var(--vc-glow)}
+.vc .dot.live{animation:vc-pulse 1.4s ease-in-out infinite}
+
+/* Chat bubbles (the answer anatomy) */
+.vc .bubble{max-width:86%;padding:10px 14px;border-radius:var(--vc-r-bubble);font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+.vc .bubble.user{background:var(--vc-accent);color:var(--vc-accent-ink);border-bottom-right-radius:5px;font-weight:500}
+.vc .bubble.bot{background:var(--vc-raised);color:var(--vc-ink);border-bottom-left-radius:5px}
+.vc .bubble.bot .lbl{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vc-muted);margin-bottom:3px}
+.vc .bubble.bot .big{display:block;font-size:28px;font-weight:300;letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
+
+/* Surfaces */
+.vc .panel{background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:var(--vc-r-card)}
+.vc .hero-lift{background:radial-gradient(60% 50% at 20% 0%,var(--vc-lift) 0%,transparent 70%)}
+
+@keyframes vc-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.vc .dot.live{animation:none}}

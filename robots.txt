@@ -1,0 +1,5 @@
+# VoiceClaw. All crawlers welcome, including AI crawlers.
+User-agent: *
+Allow: /
+
+Sitemap: https://voiceclaw.ca/sitemap.xml
