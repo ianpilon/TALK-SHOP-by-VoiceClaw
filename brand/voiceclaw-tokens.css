@@ -4,22 +4,22 @@
 
 :root{
   /* Ground and surfaces. Elevation comes from lighter surface, never from heavier borders. */
-  --vc-ground:#0d1126;
-  --vc-surface:#141936;
-  --vc-raised:#1a2040;
-  --vc-lift:#1c2350;                       /* top-left radial lift behind a hero */
-  --vc-line:rgba(138,147,184,.18);         /* the only border colour */
+  --vc-ground:#090E1F;
+  --vc-surface:#0F1629;
+  --vc-raised:#151D36;
+  --vc-lift:#141C3E;                       /* top-left radial lift behind a hero */
+  --vc-line:rgba(107,114,128,.28);         /* the only border colour */
 
   /* Ink. */
-  --vc-ink:#f3f5ff;
-  --vc-ink-2:#c9cee6;
-  --vc-muted:#8a93b8;
+  --vc-ink:#F6F7F4;
+  --vc-ink-2:#C9CED6;
+  --vc-muted:#6B7280;
 
   /* The one accent. Cyan. Never a second accent, never a warm one. */
-  --vc-accent:#22d3ee;
-  --vc-accent-ink:#06202a;                 /* text on a cyan fill */
-  --vc-glow:rgba(34,211,238,.45);
-  --vc-glow-soft:rgba(34,211,238,.12);
+  --vc-accent:#C8FF1A;
+  --vc-accent-ink:#090E1F;                 /* text on a cyan fill */
+  --vc-glow:rgba(200,255,26,.45);
+  --vc-glow-soft:rgba(200,255,26,.12);
 
   /* Semantic, small and quiet, next to a number only. */
   --vc-up:#34d399;
