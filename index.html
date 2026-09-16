@@ -108,7 +108,7 @@
   :root{
     --ground:#090E1F; --surface:#0F1629; --raised:#151D36; --line:rgba(107,114,128,.28);
     --ink:#F6F7F4; --ink-2:#C9CED6; --muted:#6B7280; --accent:#C8FF1A; --accent-ink:#090E1F;
-    --glow:rgba(200,255,26,.45); --max:1120px; --gutter:clamp(20px,4vw,48px);
+    --glow:rgba(200,255,26,.45); --cta:#5B7CFF; --cta-ink:#F6F7F4; --cta-glow:rgba(91,124,255,.55); --max:1120px; --gutter:clamp(20px,4vw,48px);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -124,8 +124,8 @@
   .kicker{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:500}
   em.hl{font-style:normal;color:var(--accent);text-shadow:0 0 26px var(--glow)}
   .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:500;font-size:15px;white-space:nowrap;transition:transform .15s ease,box-shadow .15s ease}
-  .btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 0 var(--glow)}
-  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--glow)}
+  .btn.primary{background:var(--cta);color:var(--cta-ink);box-shadow:0 0 0 0 var(--cta-glow)}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--cta-glow)}
   .btn.ghost{color:var(--ink-2);border:1px solid var(--line)}
   .btn.ghost:hover{border-color:var(--muted)}
   section{padding:clamp(72px,10vw,128px) 0;border-top:1px solid var(--line)}
@@ -151,7 +151,11 @@
   .cta small{display:block;width:100%;color:var(--muted);font-size:13px;margin-top:6px}
 
   /* the phone, lifted from voiceclaw.ca and recoloured to the cyan system */
-  .hero-right{display:flex;flex-direction:column;align-items:center}
+  .hero-right{display:flex;flex-direction:column;align-items:center;position:relative}
+  .hero-right .phone{position:relative;z-index:1;border-color:rgba(91,124,255,.55);box-shadow:0 32px 64px -24px rgba(0,0,0,.75),0 0 0 1px rgba(91,124,255,.25),0 0 60px -6px rgba(91,124,255,.35)}
+  /* voice wave: thin glowing lines in the brand colours, breathing slowly behind the phone */
+  .wave{position:absolute;left:-38%;top:50%;width:200%;height:160%;transform:translateY(-50%);z-index:0;pointer-events:none;opacity:.4}
+  @media (max-width:900px){.wave{left:-20%;width:140%;height:110%;top:62%}}
   .phone{width:330px;max-width:100%;flex:0 0 auto;background:#08090b;border:1px solid rgba(138,147,184,.22);border-radius:42px;padding:12px;box-shadow:0 32px 64px -24px rgba(0,0,0,.75),inset 0 0 0 2px rgba(255,255,255,.02)}
   .phone-screen{background:var(--surface);border-radius:31px;overflow:hidden;display:flex;flex-direction:column;height:602px}
   .phone-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;border-bottom:1px solid var(--line);background:var(--raised)}
@@ -298,6 +302,7 @@
     </div>
 
     <div class="hero-right">
+      <canvas class="wave" id="wave" aria-hidden="true"></canvas>
       <div class="phone" id="phone" aria-label="Example conversation with the business memory">
         <div class="phone-screen">
           <div class="phone-bar">
@@ -432,16 +437,16 @@
   var SCENARIOS = [
     [ { t: 'user',   text: 'What jobs are still open from last week?' },
       { t: 'lookup', text: 'checked · work orders + shop board' },
-      { t: 'bot',    lbl: 'Open work orders · last week', big: '3 open', text: 'Unit 214 brake job (Mike), the Kowalski trailer inspection, and a road call in Barrie with no parts logged yet.' } ],
+      { t: 'bot',    lbl: 'Open work orders · last week', big: '3 open', text: 'Unit 214 brake job (Devon), the Ferreira trailer inspection, and a road call in Guelph with no parts logged yet.' } ],
     [ { t: 'user',   text: 'Where is the paperwork for that job?' },
       { t: 'lookup', text: 'checked · files + photos' },
-      { t: 'bot',    lbl: 'Unit 214 · brake job', big: 'On file', text: 'Signed work order and two photos from Mike\'s phone, added Tuesday 4:12 pm. Safety certificate due Oct 14.' } ],
+      { t: 'bot',    lbl: 'Unit 214 · brake job', big: 'On file', text: 'Signed work order and two photos from Devon\'s phone, added Tuesday 4:12 pm. Safety certificate due Oct 14.' } ],
     [ { t: 'user',   text: 'What did we quote them last time?' },
       { t: 'lookup', text: 'checked · quotes + email' },
-      { t: 'bot',    lbl: 'Henderson Farms · quote, Mar 3', big: '$4,850', text: 'Reefer service, two units, parts included. Sent by email, never signed. Sandy can resend it.' } ],
+      { t: 'bot',    lbl: 'Larkspur Farms · quote, Mar 3', big: '$4,850', text: 'Reefer service, two units, parts included. Sent by email, never signed. Vanessa can resend it.' } ],
     [ { t: 'user',   text: 'Who owes us the most right now?' },
       { t: 'lookup', text: 'checked · accounting' },
-      { t: 'bot',    lbl: 'Receivables · today', big: '$18,200', text: 'Northgate Logistics, 74 days. Three invoices. Last payment came in June.' } ]
+      { t: 'bot',    lbl: 'Receivables · today', big: '$18,200', text: 'Coldbrook Haulage, 74 days. Three invoices. Last payment came in June.' } ]
   ];
   var chat = document.getElementById('chat');
   var phone = document.getElementById('phone');
@@ -523,6 +528,49 @@
       await play(0);                                 // opening scenario, then the composer takes over
     }, 900);
   });
+})();
+</script>
+
+<script>
+(function(){
+  // Voice wave behind the hero phone. Two bundles of thin lines, chartreuse and indigo, drifting slowly.
+  var c=document.getElementById('wave'); if(!c) return;
+  var ctx=c.getContext('2d'), W=0,H=0,dpr=1, t=0;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){ var r=c.getBoundingClientRect(); dpr=Math.min(window.devicePixelRatio||1,2); W=Math.max(1,Math.round(r.width)); H=Math.max(1,Math.round(r.height)); c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  // speech-like wave: a flat baseline with a few tall, narrow bursts. The line bundle converges on the
+  // baseline and fans out in proportion to the amplitude, so quiet stretches are a single line and peaks bloom.
+  function amp(u,ph,sp){
+    var a=0, bursts=[[0.22,0.55,0.040,9],[0.40,1.00,0.032,12],[0.52,0.62,0.045,7],[0.68,0.85,0.034,10],[0.84,0.40,0.050,6]];
+    for(var j=0;j<bursts.length;j++){
+      var b=bursts[j], c=b[0]+0.035*Math.sin(t*0.35*sp+j*1.7+ph), g=Math.exp(-((u-c)*(u-c))/(2*b[2]*b[2]));
+      var breathe=0.65+0.35*Math.sin(t*0.9*sp+j*2.3+ph);
+      a+=b[1]*g*breathe*Math.sin(u*b[3]*6.283+t*1.6*sp+ph+j);
+    }
+    return a;
+  }
+  function bundle(color,lines,ph,scale,sp){
+    for(var k=0;k<lines;k++){
+      var off=(k-(lines-1)/2)/(lines-1);
+      ctx.beginPath();
+      for(var x=0;x<=W;x+=3){
+        var u=x/W, a=amp(u,ph,sp)*scale, edge=Math.min(1,Math.min(u,1-u)*6);
+        var y=H/2 + a*(1+off*1.9)*edge + off*2.5;
+        x?ctx.lineTo(x,y):ctx.moveTo(x,y);
+      }
+      ctx.strokeStyle=color; ctx.lineWidth=1.2; ctx.globalAlpha=0.30+0.26*(1-Math.abs(off)*2); ctx.stroke();
+    }
+  }
+  function frame(){
+    ctx.clearRect(0,0,W,H); ctx.globalCompositeOperation='lighter'; ctx.shadowBlur=16;
+    ctx.shadowColor='rgba(91,124,255,.65)'; bundle('#5B7CFF',15,0.0,H*0.19,1.0);
+    ctx.shadowColor='rgba(91,124,255,.65)'; bundle('#5B7CFF',15,2.4,H*0.16,0.8);
+    ctx.shadowBlur=0; ctx.globalAlpha=1; ctx.globalCompositeOperation='destination-in';
+    var g=ctx.createLinearGradient(0,0,W,0); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(0.18,'rgba(0,0,0,1)'); g.addColorStop(0.82,'rgba(0,0,0,1)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H); ctx.globalCompositeOperation='source-over';
+    t+=0.026; if(!reduce) requestAnimationFrame(frame);
+  }
+  size(); window.addEventListener('resize',function(){size(); if(reduce) frame();}); frame();
 })();
 </script>
 </body>

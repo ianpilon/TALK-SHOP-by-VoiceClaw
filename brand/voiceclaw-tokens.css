@@ -17,7 +17,10 @@
 
   /* The one accent. Cyan. Never a second accent, never a warm one. */
   --vc-accent:#C8FF1A;
-  --vc-accent-ink:#090E1F;                 /* text on a cyan fill */
+  --vc-accent-ink:#090E1F;                 /* text on a chartreuse fill */
+  --vc-cta:#5B7CFF;                        /* primary buttons: indigo, never the logo green */
+  --vc-cta-ink:#F6F7F4;
+  --vc-cta-glow:rgba(91,124,255,.55);
   --vc-glow:rgba(200,255,26,.45);
   --vc-glow-soft:rgba(200,255,26,.12);
 
@@ -56,8 +59,8 @@
 
 /* Buttons */
 .vc .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--vc-r-pill);font-weight:500;font-size:15px;white-space:nowrap;text-decoration:none;cursor:pointer;border:0;font-family:inherit;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
-.vc .btn.primary{background:var(--vc-accent);color:var(--vc-accent-ink)}
-.vc .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--vc-glow)}
+.vc .btn.primary{background:var(--vc-cta);color:var(--vc-cta-ink)}
+.vc .btn.primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--vc-cta-glow)}
 .vc .btn.ghost{background:transparent;color:var(--vc-ink-2);border:1px solid var(--vc-line)}
 .vc .btn.ghost:hover{border-color:var(--vc-muted)}
 .vc .btn:focus-visible{outline:2px solid var(--vc-accent);outline-offset:3px}
