@@ -146,7 +146,8 @@
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 20% 0%,#141C3E 0%,transparent 70%);pointer-events:none}
   .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,6vw,80px);align-items:start}
   @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
-  .hero p.lead{font-size:clamp(18px,2vw,21px);color:var(--ink-2);margin:26px 0 34px;max-width:520px;text-wrap:pretty}
+  .hero p.lead{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:26px 0 34px}
+  .hero p.lead .ko{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:clamp(18px,2vw,22px);line-height:1.25;padding:5px 11px;border-radius:5px}
   .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .cta small{display:block;width:100%;color:var(--muted);font-size:13px;margin-top:6px}
 
@@ -292,8 +293,8 @@
   <div class="wrap">
     <div>
       <span class="kicker">For owner-operators</span>
-      <h1>A managed business memory you can <em class="hl">talk to.</em></h1>
-      <p class="lead">Ask about any asset, customer, or job and get an answer by voice or text instead of chasing people.</p>
+      <h1>A business memory you can talk to.</h1>
+      <p class="lead"><span class="ko">Ask by voice or text.</span><span class="ko">Get the answer.</span></p>
       <div class="cta">
         <a class="btn primary" href="https://cal.com/ian-pilon/20min">Book a 20-minute call</a>
         <a class="btn ghost" href="#how">See how it works</a>
