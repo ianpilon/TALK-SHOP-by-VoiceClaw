@@ -29,10 +29,6 @@
   .cover .lead{max-width:56ch;margin:26px 0 0}
   .cover .meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:38px;font-size:13px;color:var(--vc-muted)}
   .cover .meta b{color:var(--vc-ink-2);font-weight:500}
-  .changes{margin-top:34px;padding:18px 22px;border-left:2px solid var(--vc-accent);background:linear-gradient(90deg,rgba(200,255,26,.06),transparent 60%);border-radius:0 14px 14px 0;max-width:62ch}
-  .changes .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--vc-accent);font-weight:500;margin-bottom:8px}
-  .changes ul{margin:0;padding-left:18px;color:var(--vc-ink-2);font-size:14.5px}
-  .changes li+li{margin-top:4px}
 
   section{padding-block:72px;border-bottom:1px solid var(--vc-line)}
   section:last-of-type{border-bottom:0}
@@ -55,8 +51,6 @@
   .sw b{display:block;font-size:13.5px;font-weight:500}
   .sw code{display:inline-block;margin-top:4px;font-size:11.5px;padding:1px 5px}
   .sw small{display:block;color:var(--vc-muted);font-size:12px;margin-top:6px;line-height:1.35}
-  .sw.rejected i{position:relative}
-  .sw.rejected i::after{content:"retired";position:absolute;inset:auto 8px 8px auto;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:rgba(9,14,31,.85);color:#F6F7F4;padding:3px 7px;border-radius:999px}
 
   /* Type specimens */
   .spec{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:baseline;padding:18px 0;border-top:1px solid var(--vc-line)}
@@ -141,19 +135,9 @@
   <h1>How VoiceClaw looks, sounds, and <em class="hl">behaves.</em></h1>
   <p class="lead">One reference for every VoiceClaw surface: the website, the rack card, the business card, the trade-show banners, the LinkedIn page, the product, and any app that comes next. Every value here is lifted from what has already shipped, so following this guide keeps new work matching old work.</p>
   <div class="meta">
-    <span><b>Version</b> 2, written 2026-09-17 (v1 was 2026-09-11)</span>
+    <span><b>Version</b> 2, written 2026-09-17</span>
     <span><b>Sources</b> voiceclaw.ca, the rack card, the business card, the trade-show backdrop and pull-up, the product one-liner</span>
     <span><b>Owner</b> Ian Pilon</span>
-  </div>
-  <div class="changes">
-    <div class="t">What changed in v2</div>
-    <ul>
-      <li>Cyan is retired. The accent is chartreuse on a deeper indigo navy.</li>
-      <li>Indigo is the action colour for primary buttons and the voice wave. Two colours, two jobs.</li>
-      <li>The wordmark is chartreuse on navy by default, not white.</li>
-      <li>The one-liner has a short form for headlines and print.</li>
-      <li>New: knockout lines, photography, print, and a renamed demo cast.</li>
-    </ul>
   </div>
 </div></header>
 
@@ -224,12 +208,6 @@
     <div class="sw"><i style="background:radial-gradient(circle at 50% 50%,rgba(200,255,26,.45),rgba(200,255,26,0) 70%),#090E1F"></i><div><b>Glow</b><code>rgba(200,255,26,.45)</code><small>Text shadow and box shadow colour. Soft version at .12 for focus rings. Indigo glow <code>rgba(91,124,255,.55)</code> under a hovered button only.</small></div></div>
     <div class="sw"><i style="background:#090E1F;display:flex"><span style="margin:auto;font-size:15px"><span style="color:#34d399">▲ +1%</span>&nbsp;&nbsp;<span style="color:#f87171">▼ -3%</span></span></i><div><b>Up / down</b><code>#34d399 / #f87171</code><small>Only next to a number. Never a field, never a button.</small></div></div>
   </div>
-  <div class="sub">Retired</div>
-  <div class="swatches">
-    <div class="sw rejected"><i style="background:#22d3ee"></i><div><b>Cyan</b><code>#22d3ee</code><small>The v1 accent, on the old navy #0d1126. Retired 2026-09-16 when the chartreuse card palette shipped. Do not mix the two.</small></div></div>
-    <div class="sw rejected"><i style="background:#0F172A"></i><div><b>Slate navy</b><code>#0F172A</code><small>The ground on the palette card. Too grey next to the green. The deeper indigo set above replaced it the same night.</small></div></div>
-    <div class="sw rejected"><i style="background:#f5511d"></i><div><b>Orange</b><code>#f5511d</code><small>Tried on the trade-show banner and rejected. Warm accents are out.</small></div></div>
-  </div>
   <div class="grid g2" style="margin-top:36px">
     <p class="rule"><b>Two colours, two jobs.</b> Chartreuse says "this is VoiceClaw" and "this is the answer". Indigo says "press this". They never swap: no green button, no indigo headline word, no two-colour wave. If a page needs a third emphasis colour, the hierarchy is wrong, not the palette.</p>
     <p class="rule"><b>No light theme.</b> VoiceClaw is dark only. Paint the ground explicitly on every surface so it holds on any host. A green glow behind a panel turns muddy yellow: glow the text and the dots, not the backgrounds.</p>
@@ -252,7 +230,7 @@
     <p class="rule"><b>The headline is plain.</b> The site H1 and the print headlines sit in off-white with no highlighted word. The two knockout lines under them carry the colour. Section titles and the closing question keep one highlighted phrase.</p>
     <p class="rule"><b>The highlighted phrase.</b> On a section title, one phrase turns chartreuse with a glow: the payoff word, not the subject. "answers?" "behaves." Never two phrases, never a whole line.</p>
     <p class="rule"><b>Weight rules.</b> 500 for headings and buttons, 400 for text, 300 for big numbers. The knockout line is the one place weight 600 is allowed, because navy on chartreuse needs the mass. Nothing else is bold. Emphasis comes from colour and size, not weight.</p>
-    <p class="rule"><b>Inter stays.</b> Space Grotesk Bold was tried for headlines with the new palette and rejected. Do not introduce a second face for headlines.</p>
+    <p class="rule"><b>Inter only.</b> One face for everything, headlines included. Do not introduce a second face.</p>
     <p class="rule"><b>Phones.</b> Under 760 px the H1 is <code>min(38px,10vw)</code> so it holds two lines on a 360 px screen. Balance the wrap on the note under the buttons.</p>
   </div>
 </div></section>
@@ -463,7 +441,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
     <tr><td>What did we quote them last time?</td><td>quotes + email</td><td><b style="font-weight:500">$4,850.</b> Larkspur Farms, Mar 3. Reefer service, two units, parts included. Sent by email, never signed. Vanessa can resend it.</td></tr>
     <tr><td>Who owes us the most right now?</td><td>accounting</td><td><b style="font-weight:500">$18,200.</b> Coldbrook Haulage, 74 days. Three invoices. Last payment came in June.</td></tr>
   </table></div>
-  <p class="cap">The cast: Devon (tech), Vanessa (office), Larkspur Farms, Coldbrook Haulage, the Ferreira trailer, Unit 214, a road call in Guelph. Reuse them so demos feel like one business. The v1 cast (Mike, Sandy, Henderson Farms, Northgate, Kowalski, Barrie) was tied to the first customer and was retired on 2026-09-16; do not bring those names back. The proof line about the first customer stays anonymous: "a reefer trailer leasing and service company in Ontario."</p>
+  <p class="cap">The cast: Devon (tech), Vanessa (office), Larkspur Farms, Coldbrook Haulage, the Ferreira trailer, Unit 214, a road call in Guelph. Reuse them so demos feel like one business. Never use a name tied to the first customer. The proof line about the first customer stays anonymous: "a reefer trailer leasing and service company in Ontario."</p>
 </div></section>
 
 <section id="never"><div class="wrap vc">
@@ -486,7 +464,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
       <li>Preview every iteration at a fresh filename. Check 1280, 390, 360.</li>
     </ul>
     <ul class="dont">
-      <li>No cyan, no orange, no warm accent, no third colour.</li>
+      <li>No warm accent, no third colour.</li>
       <li>No green button. No indigo text. No two-colour wave.</li>
       <li>No green glow behind a panel. No highlighted word in the H1.</li>
       <li>No light theme. No grey or pure black grounds.</li>
@@ -497,7 +475,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
       <li>No bold weight outside the knockout line. No exclamation marks.</li>
       <li>No em dashes anywhere in outbound text.</li>
       <li>No "second brain", "queryable", "platform", "AI-powered".</li>
-      <li>No real customer names in demos, and none of the retired cast.</li>
+      <li>No real customer names in demos.</li>
       <li>No prices on a page. Numbers on the call.</li>
       <li>No glow in print. No CMYK conversion of the green.</li>
     </ul>
