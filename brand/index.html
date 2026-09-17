@@ -113,6 +113,15 @@
   .photo::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,14,31,.92) 0%,rgba(9,14,31,.75) 45%,rgba(9,14,31,.35) 100%)}
   .photo .q{position:relative;padding:36px 32px;max-width:24ch;font-size:clamp(22px,2.6vw,30px);font-weight:500;letter-spacing:-.02em;line-height:1.2;color:var(--vc-ink)}
 
+  /* Print colour */
+  .inks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px}
+  .ink{background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:14px;overflow:hidden}
+  .ink i{display:block;height:64px}
+  .ink div{padding:12px 16px 14px}
+  .ink b{display:block;font-weight:500;color:var(--vc-ink)}
+  .ink code{display:inline-block;margin-top:5px;font-size:11.5px}
+  .ink p{margin:8px 0 0;color:var(--vc-muted);font-size:13.5px;line-height:1.45}
+
   /* Print specs */
   .prints{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px}
   .pr{background:var(--vc-surface);border:1px solid var(--vc-line);border-radius:14px;padding:18px 20px}
@@ -126,7 +135,7 @@
 
 <nav class="toc"><div class="wrap">
   <img src="voiceclaw-logo.svg?v=2" alt="VoiceClaw">
-  <a href="#essence">Essence</a><a href="#logo">Logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#glow">Glow</a><a href="#components">Components</a><a href="#layout">Layout</a><a href="#photo">Photography</a><a href="#print">Print</a><a href="#voice">Voice</a><a href="#writing">Writing rules</a><a href="#demo">Demo content</a><a href="#never">Never</a><a href="#files">Files</a>
+  <a href="#essence">Essence</a><a href="#logo">Logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#glow">Glow</a><a href="#components">Components</a><a href="#layout">Layout</a><a href="#photo">Photography</a><a href="#print">Print</a><a href="#print-colour">Print colour</a><a href="#voice">Voice</a><a href="#writing">Writing rules</a><a href="#demo">Demo content</a><a href="#never">Never</a><a href="#files">Files</a>
   <span class="v">v2 · Sep 2026</span>
 </div></nav>
 
@@ -202,7 +211,7 @@
   </div>
   <div class="sub">The two accents</div>
   <div class="swatches">
-    <div class="sw"><i style="background:#C8FF1A"></i><div><b>Chartreuse</b><code>#C8FF1A</code><small>Identity and answers. The wordmark, the highlighted phrase, knockout lines, dots, numerals, glow. Print: PANTONE 809 C.</small></div></div>
+    <div class="sw"><i style="background:#C8FF1A"></i><div><b>Chartreuse</b><code>#C8FF1A</code><small>Identity and answers. The wordmark, the highlighted phrase, knockout lines, dots, numerals, glow. Print: PANTONE 802 C, see Print colour.</small></div></div>
     <div class="sw"><i style="background:#090E1F;display:flex"><span style="margin:auto;font-size:15px;color:#C8FF1A;text-shadow:0 0 22px rgba(200,255,26,.45)">Accent ink is navy</span></i><div><b>Accent ink</b><code>#090E1F</code><small>Text on a chartreuse fill is the ground colour. Never white on chartreuse.</small></div></div>
     <div class="sw"><i style="background:#5B7CFF"></i><div><b>Indigo</b><code>#5B7CFF</code><small>Action. Primary buttons, the voice wave, the phone's edge glow. Never for text, never for the wordmark.</small></div></div>
     <div class="sw"><i style="background:radial-gradient(circle at 50% 50%,rgba(200,255,26,.45),rgba(200,255,26,0) 70%),#090E1F"></i><div><b>Glow</b><code>rgba(200,255,26,.45)</code><small>Text shadow and box shadow colour. Soft version at .12 for focus rings. Indigo glow <code>rgba(91,124,255,.55)</code> under a hovered button only.</small></div></div>
@@ -353,10 +362,29 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
     <div class="pr"><b>Pull-up</b><p>33 x 80 in. The short form and the two knockout lines, photo cutout, URL. Deliberately different from the backdrop: it describes, the backdrop stops you.<br><code>marketing/trade-show/*pullup*</code></p></div>
   </div>
   <div class="grid g2" style="margin-top:36px">
-    <p class="rule"><b>Inks.</b> Two spot inks, no process. PANTONE 2768 C is the navy, flooded to the bleed on both sides. PANTONE 809 C is the chartreuse: wordmark, QR, green lines and bullets. 809 C is the only ink that reaches #C8FF1A. If it is unavailable, 389 C or 3955 C is the nearest standard lime, and the printer must be told it will not be neon.</p>
+    <p class="rule"><b>Inks.</b> Two spot inks, no process. PANTONE 2768 C is the navy, flooded to the bleed on both sides. The chartreuse is a fluorescent spot ink, never a CMYK build. The full colour rules are in Print colour, below.</p>
     <p class="rule"><b>Off-white is the paper.</b> Print on bright white stock and knock the text out of the navy. No white ink, no third colour. The screen PDFs preview in brand RGB; print to the named inks, not the preview.</p>
     <p class="rule"><b>Draw, do not screenshot.</b> Cards and flyers are drawn straight to vector PDF with reportlab (the <code>draw_card.py</code> and <code>draw_rack.py</code> pattern, Inter embedded, TrimBox and BleedBox set). Headless Chrome is for the large banners only, rendered in the background with a fresh profile, and it needs no glow anywhere on the page.</p>
     <p class="rule"><b>Proofs.</b> Every print file ships with a FLAT PDF and a FLAT PNG beside it for checking on screen, and a SPOT PDF for the printer. The QR codes are error level H and keep a navy clear zone.</p>
+  </div>
+</div></section>
+
+<section id="print-colour"><div class="wrap vc">
+  <h2>Print colour</h2>
+  <p class="lead">The hex values in this guide are screen colours. A printer cannot make chartreuse #C8FF1A out of cyan, magenta, yellow, and black: it is a neon, "hot" colour, and on paper it comes out duller and more olive. These rules say what to ask for instead.</p>
+  <div class="inks">
+    <div class="ink"><i style="background:#C8FF1A"></i><div><b>Screen</b><code>#C8FF1A</code><p>The reference. What the site, the OG image, and every proof PNG show. Not a print value.</p></div></div>
+    <div class="ink"><i style="background:#C4E52A"></i><div><b>Spot ink, the real thing</b><code>PANTONE 802 C</code><p>Fluorescent neon green. The only way the printed green matches the screen. Ask the shop for it by name, as a spot colour, and get a drawdown before the run.</p></div></div>
+    <div class="ink"><i style="background:#CEDC00"></i><div><b>Standard ink</b><code>PANTONE 381 C</code><p>The nearest non-fluorescent Pantone. Use it when the shop has no neon ink. It is a strong lime, not neon, and it will read darker than the screen.</p></div></div>
+    <div class="ink"><i style="background:#C7E52E"></i><div><b>Process, the fallback</b><code>C 22 · M 0 · Y 94 · K 0</code><p>The best CMYK match for home, office, and digital-press printing. Expect it slightly duller and more olive than the screen. Never let it be the first choice for a card or a banner.</p></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:36px">
+    <p class="rule"><b>Professional print: spot colour.</b> Cards, rack cards, and banners go to a shop as spot-colour artwork: PANTONE 2768 C for the navy and PANTONE 802 C for the green, with no CMYK conversion of either. The green knocks out of the navy, no overprint. If the shop says it cannot run a fluorescent ink, it prints 381 C and the proof is signed off knowing the green will be darker.</p>
+    <p class="rule"><b>Home, office, and Canva: CMYK.</b> Change the document colour mode to CMYK before you place any colour, then enter C 22, M 0, Y 94, K 0 for the green. Do not paste the hex and let the software convert it: the automatic conversion is worse than the values above. Check one printed sheet before printing the batch.</p>
+    <p class="rule"><b>Off-white is the paper.</b> Ink #F6F7F4 does not exist in print. The off-white text is a knockout to bright white stock, so the paper is the text colour. Choose the stock with that in mind: bright white, 16 pt for cards, uncoated or silk.</p>
+    <p class="rule"><b>The navy.</b> PANTONE 2768 C as a spot ink wherever the green is a spot ink. On a CMYK job the shop builds the navy from its own 2768 C conversion, and the proof decides. A navy that goes purple or grey is rejected.</p>
+    <p class="rule"><b>Proof on paper, not on screen.</b> Every print file ships with a FLAT PDF and PNG for checking layout on screen, and a SPOT PDF for the press. The screen files preview in brand RGB and will always look brighter than the print. The only proof that counts for colour is a printed one.</p>
+    <p class="rule"><b>Tell the shop.</b> Send the print spec text file with every order: the named inks, the note that 802 C is fluorescent and must not be converted, the stock, the bleed, and the QR clear zone. Ask which software and press they run before sending artwork, because a digital press cannot run a spot ink at all and needs the CMYK file.</p>
   </div>
 </div></section>
 
@@ -459,7 +487,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
       <li>Real questions as placeholders and examples, from the demo cast.</li>
       <li>The full one-liner as the description, the short form on headlines.</li>
       <li>Say who it is not for.</li>
-      <li>Print: 2768 C and 809 C on white stock, drawn with reportlab.</li>
+      <li>Print: spot inks 2768 C and 802 C on white stock, or C 22 M 0 Y 94 K 0. Drawn with reportlab.</li>
       <li>Keep the LinkedIn cover's bottom-left corner empty.</li>
       <li>Preview every iteration at a fresh filename. Check 1280, 390, 360.</li>
     </ul>
