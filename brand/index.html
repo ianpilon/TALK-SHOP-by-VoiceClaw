@@ -237,7 +237,7 @@
   </div>
   <div class="sub">The two accents</div>
   <div class="swatches">
-    <div class="sw"><i style="background:#C8FF1A"></i><div><b>Chartreuse</b><code>#C8FF1A</code><small>Identity and answers. The wordmark, the highlighted phrase, knockout lines, dots, numerals, glow. Print: PANTONE 802 C, see Print colour.</small></div></div>
+    <div class="sw"><i style="background:#C8FF1A"></i><div><b>Chartreuse</b><code>#C8FF1A</code><small>Identity and answers. The wordmark, the highlighted phrase, knockout lines, dots, numerals, glow. Print: PANTONE 809 C, see Print colour.</small></div></div>
     <div class="sw"><i style="background:#090E1F;display:flex"><span style="margin:auto;font-size:15px;color:#C8FF1A;text-shadow:0 0 22px rgba(200,255,26,.45)">Accent ink is navy</span></i><div><b>Accent ink</b><code>#090E1F</code><small>Text on a chartreuse fill is the ground colour. Never white on chartreuse.</small></div></div>
     <div class="sw"><i style="background:#5B7CFF"></i><div><b>Indigo</b><code>#5B7CFF</code><small>Action. Primary buttons, the voice wave, the phone's edge glow. Never for text, never for the wordmark.</small></div></div>
     <div class="sw"><i style="background:radial-gradient(circle at 50% 50%,rgba(200,255,26,.45),rgba(200,255,26,0) 70%),#090E1F"></i><div><b>Glow</b><code>rgba(200,255,26,.45)</code><small>Text shadow and box shadow colour. Soft version at .12 for focus rings. Indigo glow <code>rgba(91,124,255,.55)</code> under a hovered button only.</small></div></div>
@@ -404,17 +404,16 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
   <p class="lead">The hex values in this guide are screen colours. A printer cannot make chartreuse #C8FF1A out of cyan, magenta, yellow, and black: it is a neon, "hot" colour, and on paper it comes out duller and more olive. These rules say what to ask for instead.</p>
   <div class="inks">
     <div class="ink"><i style="background:#C8FF1A"></i><div><b>Screen</b><code>#C8FF1A</code><p>The reference. What the site, the OG image, and every proof PNG show. Not a print value.</p></div></div>
-    <div class="ink"><i style="background:#C4E52A"></i><div><b>Spot ink, the real thing</b><code>PANTONE 802 C</code><p>Fluorescent neon green. The only way the printed green matches the screen. Ask the shop for it by name, as a spot colour, and get a drawdown before the run.</p></div></div>
-    <div class="ink"><i style="background:#CEDC00"></i><div><b>Standard ink</b><code>PANTONE 381 C</code><p>The nearest non-fluorescent Pantone. Use it when the shop has no neon ink. It is a strong lime, not neon, and it will read darker than the screen.</p></div></div>
-    <div class="ink"><i style="background:#C7E52E"></i><div><b>Process, the fallback</b><code>C 22 · M 0 · Y 94 · K 0</code><p>The best CMYK match for home, office, and digital-press printing. Expect it slightly duller and more olive than the screen. Never let it be the first choice for a card or a banner.</p></div></div>
+    <div class="ink"><i style="background:#E0E721"></i><div><b>Spot ink, the real thing</b><code>PANTONE 809 C</code><p>Fluorescent yellow-green. 809 C is the only ink that reaches the brand chartreuse. Ask the shop for it by name, as a spot colour, and get a drawdown before the run. Do not convert it to CMYK.</p></div></div>
+    <div class="ink"><i style="background:#D0DF00"></i><div><b>Standard ink, last resort</b><code>PANTONE 389 C</code><p>The closest non-fluorescent Pantone. Only if 809 C is unavailable. It is a strong lime, not neon, and it will read darker than the screen.</p></div></div>
   </div>
   <div class="grid g2" style="margin-top:36px">
-    <p class="rule"><b>Professional print: spot colour.</b> Cards, rack cards, and banners go to a shop as spot-colour artwork: PANTONE 2768 C for the navy and PANTONE 802 C for the green, with no CMYK conversion of either. The green knocks out of the navy, no overprint. If the shop says it cannot run a fluorescent ink, it prints 381 C and the proof is signed off knowing the green will be darker.</p>
-    <p class="rule"><b>Home, office, and Canva: CMYK.</b> Change the document colour mode to CMYK before you place any colour, then enter C 22, M 0, Y 94, K 0 for the green. Do not paste the hex and let the software convert it: the automatic conversion is worse than the values above. Check one printed sheet before printing the batch.</p>
+    <p class="rule"><b>Professional print: spot colour.</b> Cards, rack cards, and banners go to a shop as spot-colour artwork: PANTONE 2768 C for the navy and PANTONE 809 C for the green, with no CMYK conversion of either. Green knocks out of the navy; no overprint. If the shop says it cannot run a fluorescent ink, it prints 389 C as a last resort, and the proof is signed off knowing the green will be darker.</p>
+    <p class="rule"><b>No CMYK.</b> A home printer, an office printer, or a digital press cannot run a spot ink, and no process build reaches the chartreuse. What they print is not brand colour. Use them to check layout only, and send anything that goes in front of a customer to a shop that carries 809 C.</p>
     <p class="rule"><b>Off-white is the paper.</b> Ink #F6F7F4 does not exist in print. The off-white text is a knockout to bright white stock, so the paper is the text colour. Choose the stock with that in mind: bright white, 16 pt for cards, uncoated or silk.</p>
-    <p class="rule"><b>The navy.</b> PANTONE 2768 C as a spot ink wherever the green is a spot ink. On a CMYK job the shop builds the navy from its own 2768 C conversion, and the proof decides. A navy that goes purple or grey is rejected.</p>
-    <p class="rule"><b>Proof on paper, not on screen.</b> Every print file ships with a FLAT PDF and PNG for checking layout on screen, and a SPOT PDF for the press. The screen files preview in brand RGB and will always look brighter than the print. The only proof that counts for colour is a printed one.</p>
-    <p class="rule"><b>Tell the shop.</b> Send the print spec text file with every order: the named inks, the note that 802 C is fluorescent and must not be converted, the stock, the bleed, and the QR clear zone. Ask which software and press they run before sending artwork, because a digital press cannot run a spot ink at all and needs the CMYK file.</p>
+    <p class="rule"><b>The navy.</b> PANTONE 2768 C as a spot ink, flooded to the bleed. The proof decides: a navy that goes purple or grey is rejected.</p>
+    <p class="rule"><b>Proof on paper, not on screen.</b> Every print file ships with a FLAT PDF and PNG for checking layout on screen, and a SPOT PDF for the press. The PDFs preview in brand RGB on screen; print to the named inks, not the preview colours. The screen files will always look brighter than the print, and the only proof that counts for colour is a printed one.</p>
+    <p class="rule"><b>Tell the shop.</b> Send the print spec text file with every order: the named inks, the note that 809 C is fluorescent and must not be converted, the stock, the bleed, and the QR clear zone. Ask which press they run before sending artwork, because a digital press cannot run a spot ink at all.</p>
   </div>
 </div></section>
 
@@ -517,7 +516,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
       <li>Real questions as placeholders and examples, from the demo cast.</li>
       <li>The full one-liner as the description, the short form on headlines.</li>
       <li>Say who it is not for.</li>
-      <li>Print: spot inks 2768 C and 802 C on white stock, or C 22 M 0 Y 94 K 0. Drawn with reportlab.</li>
+      <li>Print: spot inks 2768 C and 809 C on white stock. Drawn with reportlab.</li>
       <li>Keep the LinkedIn cover's bottom-left corner empty.</li>
       <li>Preview every iteration at a fresh filename. Check 1280, 390, 360.</li>
     </ul>
