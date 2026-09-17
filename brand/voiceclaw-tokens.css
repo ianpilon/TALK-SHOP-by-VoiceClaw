@@ -1,4 +1,4 @@
-/* VoiceClaw brand tokens, v1 (2026-09-11).
+/* VoiceClaw brand tokens, v2 (2026-09-17). v1 was cyan on #0d1126; retired 2026-09-16.
    Source of truth for every VoiceClaw surface. Values are lifted verbatim from voiceclaw.ca.
    Drop this file into any app and build on the variables and classes below. Dark only. */
 
@@ -15,10 +15,11 @@
   --vc-ink-2:#C9CED6;
   --vc-muted:#6B7280;
 
-  /* The one accent. Cyan. Never a second accent, never a warm one. */
+  /* Two colours with two jobs. Chartreuse = identity and answers (wordmark, highlighted phrase, glow, dots, numerals).
+     Indigo = action (primary button, voice wave). Never green on a button, never indigo on text. Never a warm colour. */
   --vc-accent:#C8FF1A;
   --vc-accent-ink:#090E1F;                 /* text on a chartreuse fill */
-  --vc-cta:#5B7CFF;                        /* primary buttons: indigo, never the logo green */
+  --vc-cta:#5B7CFF;                        /* primary buttons and the voice wave: indigo, never the logo green */
   --vc-cta-ink:#F6F7F4;
   --vc-cta-glow:rgba(91,124,255,.55);
   --vc-glow:rgba(200,255,26,.45);
@@ -56,6 +57,8 @@
 .vc .label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--vc-muted)}
 .vc .numeral{font-size:44px;font-weight:300;letter-spacing:-.03em;line-height:1;color:var(--vc-accent);text-shadow:0 0 22px var(--vc-glow)}
 .vc .hl{font-style:normal;color:var(--vc-accent);text-shadow:0 0 26px var(--vc-glow)}   /* one phrase per headline */
+.vc .ko{display:inline-block;background:var(--vc-accent);color:var(--vc-accent-ink);font-weight:600;font-size:clamp(18px,2vw,22px);line-height:1.25;padding:5px 11px;border-radius:var(--vc-r-chip)}   /* knockout line: the one place weight 600 is allowed */
+.vc .ko + .ko{margin-top:8px}
 
 /* Buttons */
 .vc .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--vc-r-pill);font-weight:500;font-size:15px;white-space:nowrap;text-decoration:none;cursor:pointer;border:0;font-family:inherit;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
@@ -77,7 +80,7 @@
 
 /* Chat bubbles (the answer anatomy) */
 .vc .bubble{max-width:86%;padding:10px 14px;border-radius:var(--vc-r-bubble);font-size:14px;line-height:1.45;overflow-wrap:anywhere}
-.vc .bubble.user{background:var(--vc-accent);color:var(--vc-accent-ink);border-bottom-right-radius:5px;font-weight:500}
+.vc .bubble.user{background:var(--vc-muted);color:var(--vc-ink);border-bottom-right-radius:5px;font-weight:500}   /* slate, not green: the question is not the answer */
 .vc .bubble.bot{background:var(--vc-raised);color:var(--vc-ink);border-bottom-left-radius:5px}
 .vc .bubble.bot .lbl{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vc-muted);margin-bottom:3px}
 .vc .bubble.bot .big{display:block;font-size:28px;font-weight:300;letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
