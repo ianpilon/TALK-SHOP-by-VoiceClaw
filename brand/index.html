@@ -107,6 +107,11 @@
   .logo.c{background:var(--vc-accent)}
   .logo .tag{position:absolute;left:12px;bottom:10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--vc-muted)}
   .logo.c .tag{color:rgba(9,14,31,.7)}
+  .logo .dl{position:absolute;right:12px;bottom:10px;display:flex;gap:6px}
+  .logo .dl a,.logo .dl button{font:inherit;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--vc-ink-2);background:rgba(9,14,31,.55);border:1px solid var(--vc-line);border-radius:999px;padding:5px 10px;cursor:pointer;text-decoration:none}
+  .logo .dl a:hover,.logo .dl button:hover{border-color:var(--vc-accent);color:var(--vc-ink);text-decoration:none}
+  .logo.c .dl a,.logo.c .dl button{color:#090E1F;background:rgba(9,14,31,.08);border-color:rgba(9,14,31,.35)}
+  .logo.c .dl a:hover,.logo.c .dl button:hover{border-color:#090E1F;color:#090E1F}
 
   /* Photo stage */
   .photo{border-radius:16px;overflow:hidden;border:1px solid var(--vc-line);position:relative;min-height:240px;background:#090E1F url("../assets/hero-man.jpg") center 30%/cover no-repeat}
@@ -196,10 +201,10 @@
   <h2>Logo</h2>
   <p class="lead">The VoiceClaw wordmark is the company identity. The product itself has no name yet, so the wordmark carries every surface.</p>
   <div class="logos">
-    <div class="logo g"><img src="voiceclaw-logo.svg?v=2" alt="VoiceClaw wordmark, chartreuse on navy"><span class="tag">Default</span></div>
-    <div class="logo s"><img src="voiceclaw-logo.svg?v=2" alt="VoiceClaw wordmark, chartreuse on surface navy"><span class="tag">On a surface</span></div>
-    <div class="logo c"><img src="voiceclaw-logo-navy.svg" alt="VoiceClaw wordmark, navy on chartreuse"><span class="tag">On a chartreuse field</span></div>
-    <div class="logo g"><img src="voiceclaw-logo-white.svg" alt="VoiceClaw wordmark, off-white on navy"><span class="tag">Print fallback only</span></div>
+    <div class="logo g"><img src="voiceclaw-logo.svg?v=2" alt="VoiceClaw wordmark, chartreuse on navy"><span class="tag">Default</span><span class="dl"><a href="voiceclaw-logo.svg" download="voiceclaw-logo-chartreuse.svg">SVG</a><button type="button" data-svg="voiceclaw-logo.svg" data-name="voiceclaw-logo-chartreuse">PNG</button></span></div>
+    <div class="logo s"><img src="voiceclaw-logo.svg?v=2" alt="VoiceClaw wordmark, chartreuse on surface navy"><span class="tag">On a surface</span><span class="dl"><a href="voiceclaw-logo.svg" download="voiceclaw-logo-chartreuse.svg">SVG</a><button type="button" data-svg="voiceclaw-logo.svg" data-name="voiceclaw-logo-chartreuse">PNG</button></span></div>
+    <div class="logo c"><img src="voiceclaw-logo-navy.svg" alt="VoiceClaw wordmark, navy on chartreuse"><span class="tag">On a chartreuse field</span><span class="dl"><a href="voiceclaw-logo-navy.svg" download="voiceclaw-logo-navy.svg">SVG</a><button type="button" data-svg="voiceclaw-logo-navy.svg" data-name="voiceclaw-logo-navy">PNG</button></span></div>
+    <div class="logo g"><img src="voiceclaw-logo-white.svg" alt="VoiceClaw wordmark, off-white on navy"><span class="tag">Print fallback only</span><span class="dl"><a href="voiceclaw-logo-white.svg?v=2" download="voiceclaw-logo-offwhite.svg">SVG</a><button type="button" data-svg="voiceclaw-logo-white.svg?v=2" data-name="voiceclaw-logo-offwhite">PNG</button></span></div>
   </div>
   <div class="grid g2" style="margin-top:28px">
     <p class="rule"><b>Colour.</b> The mark is a single flat colour. Chartreuse on navy is the default everywhere: the site nav, the cards, the banners. On a chartreuse field it is navy. Off-white is a fallback for print jobs that cannot carry the green ink, never a choice on screen.</p>
@@ -534,7 +539,7 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
   <div class="grid g2">
     <div>
       <p class="rule"><b>Tokens.</b> <code>~/VoiceClaw/website/brand/voiceclaw-tokens.css</code>, also public at <code>voiceclaw.ca/brand/voiceclaw-tokens.css</code>. Every variable and class used on this page comes from it. Link it, add <code>class="vc"</code> to the root element, and build on the variables.</p>
-      <p class="rule"><b>Logo.</b> <code>brand/voiceclaw-logo.svg</code> (chartreuse, the default), <code>voiceclaw-logo-navy.svg</code> (on a green field), <code>voiceclaw-logo-white.svg</code> (print fallback). All the same tight cut; recolour by editing the root <code>style="color:…"</code>.</p>
+      <p class="rule"><b>Logo.</b> <code>brand/voiceclaw-logo.svg</code> (chartreuse, the default), <code>voiceclaw-logo-navy.svg</code> (on a green field), <code>voiceclaw-logo-white.svg</code> (print fallback). All the same tight cut, and each logo tile above downloads as SVG or a 2400 px transparent PNG; recolour by editing the root <code>style="color:…"</code>.</p>
       <p class="rule"><b>Reference surfaces.</b> voiceclaw.ca (the site, <code>~/VoiceClaw/website/index.html</code>); the rack card, business card, and trade-show folders under <code>~/VoiceClaw/marketing</code>; the print spec in <code>marketing/business-card/VoiceClaw-business-card-PRINT-SPEC.txt</code>; the LinkedIn cover in <code>marketing/linkedin-cover</code>.</p>
       <p class="rule"><b>Copy lives in the site and the rack scripts.</b> When a line changes on one, change it on the other. Read the strings out of <code>draw_rack.py</code> and <code>draw_rack_back.py</code> rather than guessing.</p>
       <p class="rule"><b>Booking link.</b> Every call to action goes to <code>cal.com/ian-pilon/20min</code>.</p>
@@ -558,6 +563,20 @@ box-shadow: 0 0 0 3px var(--vc-glow-soft);</code></pre>
   <figure><img id="modal-img" src="" alt=""><figcaption><b id="modal-name"></b><span id="modal-cap"></span></figcaption></figure>
 </div>
 <script>
+(function(){
+  document.querySelectorAll('.logo .dl button[data-svg]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var img=new Image();
+      img.onload=function(){
+        var W=2400,H=Math.round(W*img.naturalHeight/img.naturalWidth);
+        var c=document.createElement('canvas');c.width=W;c.height=H;
+        c.getContext('2d').drawImage(img,0,0,W,H);
+        var a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=b.dataset.name+'.png';document.body.appendChild(a);a.click();a.remove();
+      };
+      img.src=b.dataset.svg;
+    });
+  });
+})();
 (function(){
   var m=document.getElementById('modal'),img=document.getElementById('modal-img'),nm=document.getElementById('modal-name'),cp=document.getElementById('modal-cap'),last=null;
   function open(b){last=b;img.src=b.dataset.img;img.alt=b.dataset.name+' mockup';nm.textContent=b.dataset.name;cp.textContent=b.dataset.cap;m.classList.add('open');document.body.style.overflow='hidden';m.querySelector('.x').focus();}
