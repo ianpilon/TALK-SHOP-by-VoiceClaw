@@ -150,6 +150,11 @@
   .hero p.lead .ko{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:clamp(18px,2vw,22px);line-height:1.25;padding:5px 11px;border-radius:5px}
   .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .cta small{display:block;width:100%;color:var(--muted);font-size:13px;margin-top:6px}
+  @media (max-width:760px){
+    .hero p.lead .ko{font-size:17px}
+    .hero .cta .btn{width:100%;justify-content:center}
+    .hero .cta small{text-align:center}
+  }
 
   /* the phone, lifted from voiceclaw.ca and recoloured to the cyan system */
   .hero-right{display:flex;flex-direction:column;align-items:center;position:relative}
