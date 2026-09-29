@@ -6,6 +6,7 @@
 - [How it works](https://voiceclaw.ca/#how): We pull the data out, it becomes one memory, you ask and it answers.
 - [What it answers](https://voiceclaw.ca/#answers): The jobs, paperwork, and money questions owners chase people for today.
 - [Who it is for](https://voiceclaw.ca/#who): Owner-operators with a crew of five to fifty who service, rent, lease, or maintain physical things. Includes who it is not for.
+- [Exit ready](https://voiceclaw.ca/exit-ready/): For owners preparing to sell a trades or fleet business. The same business memory positioned as the control plane a buyer, a broker, or the next operator can ask. Before listing, during diligence, after close.
 - [How we work](https://voiceclaw.ca/#engage): A 90-day foundation, then a managed monthly service. Data can stay in the customer's own building.
 
 ## Brand
