@@ -1,6 +1,7 @@
 /* VoiceClaw brand tokens, v2 (2026-09-17).
    Source of truth for every VoiceClaw surface. Values are lifted verbatim from voiceclaw.ca.
-   Drop this file into any app and build on the variables and classes below. Dark only. */
+   Drop this file into any app and build on the variables and classes below.
+   Dark is the default. Add class "light" beside "vc" for the paper mode; ask which one before a new surface starts. */
 
 :root{
   /* Ground and surfaces. Elevation comes from lighter surface, never from heavier borders. */
@@ -91,3 +92,21 @@
 
 @keyframes vc-pulse{0%,100%{opacity:1}50%{opacity:.45}}
 @media (prefers-reduced-motion:reduce){.vc .dot.live{animation:none}}
+
+/* Light mode: paper ground, navy ink. Same names, new values. */
+.vc.light{
+  --vc-ground:#F4F4EF;
+  --vc-surface:#FFFFFF;
+  --vc-raised:#F6F7F4;
+  --vc-lift:#FCFCF8;
+  --vc-line:rgba(9,14,31,.08);
+  --vc-ink:#090E1F;
+  --vc-ink-2:#4A5163;
+  --vc-muted:#8A90A0;
+  --vc-glow:transparent;
+  --vc-glow-soft:rgba(91,124,255,.18);
+}
+/* Chartreuse text cannot be read on paper: the phrase becomes navy on a chartreuse marker. */
+.vc.light .hl{color:var(--vc-accent-ink);text-shadow:none;background:linear-gradient(transparent 14%,var(--vc-accent) 14%,var(--vc-accent) 92%,transparent 92%);padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.vc.light .kicker,.vc.light .numeral{color:var(--vc-ink);text-shadow:none}
+.vc.light .bubble.user{color:#F6F7F4}
