@@ -12,6 +12,11 @@
 ## Brand
 - [Brand and voice guide](https://voiceclaw.ca/brand/): Colour, type, components, and the words VoiceClaw uses.
 
+## Plugin and policies
+- [Exit-Ready Check for ChatGPT](https://voiceclaw.ca/exit-ready/): A free ChatGPT plugin that asks the twelve questions a buyer asks in diligence, scores the answers, and lists the records to gather. MCP endpoint https://voiceclaw.ca/exit-ready/mcp.
+- [Privacy](https://voiceclaw.ca/privacy/): What the website and the plugin collect (almost nothing) and how to reach us.
+- [Terms](https://voiceclaw.ca/terms/): Plain terms for the website and the plugin.
+
 ## Contact
 - Website: https://voiceclaw.ca
 - Email: ian@voiceclaw.ca
