@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a 20-minute call with Ian. VoiceClaw.</title>
+<meta name="description" content="Pick a time for a 20-minute intro call with Ian Pilon to see if a business memory you can talk to fits your business.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ground:#090E1F;--line:rgba(107,114,128,.28);--ink:#F6F7F4;--ink-2:#C9CED6;--muted:#6B7280;--accent:#C8FF1A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  header{max-width:980px;margin:0 auto;padding:28px 20px 8px;text-align:center}
+  header img{height:26px;display:block;margin:0 auto 22px}
+  h1{margin:0 0 8px;font-weight:500;letter-spacing:-.025em;font-size:clamp(28px,5vw,40px);line-height:1.1;text-wrap:balance}
+  p{margin:0 auto;color:var(--ink-2);max-width:44ch;text-wrap:pretty}
+  #cal{max-width:980px;margin:0 auto;min-height:620px;padding:0 8px}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 20px 40px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <a href="/"><img src="/assets/voiceclaw-logo.svg" alt="VoiceClaw"></a>
+  <h1>Book a 20-minute call with Ian</h1>
+  <p>A quick intro to see if VoiceClaw fits your business. Pick a time below.</p>
+</header>
+<div id="cal"></div>
+<footer>VoiceClaw Inc. · Ontario, Canada · <a href="/privacy/">Privacy</a></footer>
+
+<script src="/assets/measure.js?v=1"></script>
+<script>
+  // Cal.com inline embed loader, as published by Cal.com.
+  (function (C, A, L) { var p = function (a, ar) { a.q.push(ar); }; var d = C.document; C.Cal = C.Cal || function () { var cal = C.Cal; var ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { var api = function () { p(api, arguments); }; var namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "intro", { origin: "https://cal.com" });
+  Cal.ns.intro("inline", { elementOrSelector: "#cal", calLink: "ian-pilon/20min", config: { layout: "month_view", theme: "dark" } });
+  Cal.ns.intro("ui", { theme: "dark", hideEventTypeDetails: false, layout: "month_view" });
+
+  // A confirmed booking is reported once: Schedule to the Meta Pixel (what the ads optimize for), booked_call to PostHog.
+  var reported = false;
+  function booked() {
+    if (reported) return; reported = true;
+    fbq('track', 'Schedule');
+    posthog.capture('booked_call');
+  }
+  Cal.ns.intro("on", { action: "bookingSuccessfulV2", callback: booked });
+  Cal.ns.intro("on", { action: "bookingSuccessful", callback: booked });
+</script>
+</body>
+</html>
