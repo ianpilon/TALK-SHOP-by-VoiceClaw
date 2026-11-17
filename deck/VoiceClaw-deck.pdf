@@ -122,7 +122,7 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://voiceclaw.ca/deck/#demo)
->> /Border [ 0 0 0 ] /Rect [ 395 160 895 396 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 0 0 960 540 ] /Subtype /Link /Type /Annot
 >>
 endobj
 15 0 obj
@@ -184,7 +184,7 @@ endobj
 endobj
 21 0 obj
 <<
-/Author (VoiceClaw) /CreationDate (D:20261116194721-05'00') /Creator (anonymous) /Keywords () /ModDate (D:20261116194721-05'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+/Author (VoiceClaw) /CreationDate (D:20261116195632-05'00') /Creator (anonymous) /Keywords () /ModDate (D:20261116195632-05'00') /Producer (ReportLab PDF Library - \(opensource\)) 
   /Subject (unspecified) /Title (VoiceClaw: Exit-Ready in 90 Days) /Trapped /False
 >>
 endobj
@@ -266,26 +266,26 @@ xref
 0000857790 00000 n 
 0000858050 00000 n 
 0001054686 00000 n 
-0001054850 00000 n 
-0001055129 00000 n 
-0001256872 00000 n 
-0001257132 00000 n 
-0001392915 00000 n 
-0001393175 00000 n 
-0001393245 00000 n 
-0001393531 00000 n 
-0001393638 00000 n 
-0001393859 00000 n 
-0001394079 00000 n 
-0001394299 00000 n 
-0001394521 00000 n 
-0001394743 00000 n 
-0001394965 00000 n 
-0001395186 00000 n 
+0001054846 00000 n 
+0001055125 00000 n 
+0001256868 00000 n 
+0001257128 00000 n 
+0001392911 00000 n 
+0001393171 00000 n 
+0001393241 00000 n 
+0001393527 00000 n 
+0001393634 00000 n 
+0001393855 00000 n 
+0001394075 00000 n 
+0001394295 00000 n 
+0001394517 00000 n 
+0001394739 00000 n 
+0001394961 00000 n 
+0001395182 00000 n 
 trailer
 <<
 /ID 
-[<c275d40b8e98a0aad38e32591fafbbe8><c275d40b8e98a0aad38e32591fafbbe8>]
+[<ae927e8ac49c92a5cc2e7c35e0c4e982><ae927e8ac49c92a5cc2e7c35e0c4e982>]
 % ReportLab generated PDF document -- digest (opensource)
 
 /Info 21 0 R
@@ -293,5 +293,5 @@ trailer
 /Size 31
 >>
 startxref
-1395404
+1395400
 %%EOF
