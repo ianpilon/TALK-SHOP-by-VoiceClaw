@@ -20,67 +20,156 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root { --ground:#090E1F; --surface:#0F1629; --line:#2A3349; --ink:#F6F7F4; --ink-2:#C9CED6; --accent:#C8FF1A; --cta:#5B7CFF; }
+:root { --ground:#090E1F; --surface:#0F1629; --raised:#151D36; --line:#2A3349; --ink:#F6F7F4; --ink-2:#C9CED6; --accent:#C8FF1A; --cta:#5B7CFF; }
 * { box-sizing:border-box; margin:0; padding:0; }
-body { background:var(--ground); color:var(--ink); font-family:'Inter', Arial, sans-serif; line-height:1.5; }
-.wrap { max-width:1120px; margin:0 auto; padding:0 16px; }
-header { padding:28px 0 8px; }
-header img { height:28px; width:auto; display:block; }
-.intro { padding:24px 0 8px; }
-h1 { font-size:clamp(28px, 4.4vw, 44px); font-weight:500; line-height:1.15; letter-spacing:-0.5px; }
-.intro p { color:var(--ink-2); font-size:18px; margin-top:12px; max-width:720px; }
-.actions { display:flex; flex-wrap:wrap; gap:12px; margin:24px 0 8px; }
-.btn { display:inline-block; padding:12px 18px; border-radius:10px; font-size:16px; font-weight:500; text-decoration:none; color:var(--ink); border:1px solid var(--line); background:var(--surface); }
+html, body { background:var(--ground); }
+body { color:var(--ink); font-family:'Inter', Arial, sans-serif; line-height:1.5; }
+.wrap { max-width:1240px; margin:0 auto; padding:0 16px; }
+header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:20px 0 16px; }
+header img { height:26px; width:auto; display:block; }
+.actions { display:flex; flex-wrap:wrap; gap:8px; }
+.btn { display:inline-block; padding:9px 14px; border-radius:10px; font-size:15px; font-weight:500; text-decoration:none; color:var(--ink); border:1px solid var(--line); background:var(--surface); white-space:nowrap; }
 .btn.primary { background:var(--cta); border-color:var(--cta); }
 .btn small { color:var(--ink-2); font-weight:400; }
-.btn.primary small { color:#E6EBFF; }
-.slides { display:flex; flex-direction:column; gap:24px; padding:24px 0 40px; }
-.slide { position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#000; }
-.slide > img { display:block; width:100%; height:auto; }
-.slide video { position:absolute; left:41.146%; top:26.667%; width:52.083%; height:43.704%; border-radius:0.8%; background:#F6F7F4; object-fit:contain; }
-.hint { color:var(--ink-2); font-size:15px; margin-top:-12px; }
-footer { border-top:1px solid var(--line); padding:28px 0 48px; color:var(--ink-2); font-size:15px; }
+
+/* the deck: one slide at a time, sized to fit the screen */
+.deck { position:relative; margin:0 auto; width:min(100%, calc((100vh - 170px) * 16 / 9)); min-width:min(100%, 320px); }
+.stage { position:relative; aspect-ratio:16 / 9; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--ground); touch-action:pan-y; }
+.slide { position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateX(4%); transition:opacity 450ms ease, transform 450ms ease, visibility 0s linear 450ms; }
+.slide.from-left { transform:translateX(-4%); }
+.slide.on { opacity:1; visibility:visible; transform:none; transition:opacity 450ms ease, transform 450ms ease, visibility 0s; }
+.slide > img { display:block; width:100%; height:100%; }
+.slide video { position:absolute; left:41.146%; top:26.667%; width:52.083%; height:43.704%; background:#F6F7F4; object-fit:contain; }
+
+/* arrows on the slide edges */
+.arrow { position:absolute; top:50%; transform:translateY(-50%); width:56px; height:56px; border-radius:50%; border:1px solid var(--line); background:rgba(15,22,41,.82); color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; transition:background 150ms, color 150ms, opacity 150ms; }
+.arrow:hover, .arrow:focus-visible { background:var(--accent); color:var(--ground); border-color:var(--accent); outline:none; }
+.arrow svg { width:24px; height:24px; }
+.arrow.prev { left:16px; }
+.arrow.next { right:16px; }
+.arrow[disabled] { opacity:0; pointer-events:none; }
+.slide video:not([controls]) { cursor:pointer; }
+/* bar under the slide */
+.bar { display:flex; align-items:center; justify-content:center; gap:16px; padding:16px 0 8px; }
+.bar button.step { width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.bar button.step:hover { border-color:var(--accent); color:var(--accent); }
+.bar button.step[disabled] { opacity:.35; cursor:default; border-color:var(--line); color:var(--ink); }
+.bar button.step svg { width:20px; height:20px; }
+.dots { display:flex; gap:8px; }
+.dots button { width:10px; height:10px; border-radius:50%; border:0; background:var(--line); cursor:pointer; padding:0; transition:background 150ms, width 150ms; }
+.dots button.on { background:var(--accent); width:28px; border-radius:5px; }
+.count { color:var(--ink-2); font-size:15px; min-width:44px; text-align:center; font-variant-numeric:tabular-nums; }
+.hint { text-align:center; color:var(--ink-2); font-size:14px; padding-bottom:32px; min-height:21px; }
+footer { border-top:1px solid var(--line); padding:20px 0 40px; color:var(--ink-2); font-size:15px; }
 footer a { color:var(--ink); }
+
+@media (max-width:700px) {
+  .arrow { display:none; }
+  .dots { display:none; }
+}
+@media (prefers-reduced-motion: reduce) { .slide, .slide.on { transition:none; transform:none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><img src="/assets/voiceclaw-logo.svg" alt="VoiceClaw"></header>
-
-<section class="intro">
-<h1>Sell a business a buyer can talk to.</h1>
-<p>The VoiceClaw deck for M&amp;A advisors. Eight slides, and a 90-second demo you can play on slide 6.</p>
+<header>
+<img src="/assets/voiceclaw-logo.svg" alt="VoiceClaw">
 <div class="actions">
-<a class="btn" href="/deck/VoiceClaw-deck.pdf" download data-file="pdf">Download the PDF <small>(1.4 MB)</small></a>
-<a class="btn" href="/deck/VoiceClaw-HN-Towing-demo.mp4" download data-file="video">Download the demo video <small>(6.4 MB)</small></a>
+<a class="btn" href="/deck/VoiceClaw-deck.pdf" download data-file="pdf">PDF <small>1.4 MB</small></a>
+<a class="btn" href="/deck/VoiceClaw-HN-Towing-demo.mp4" download data-file="video">Demo video <small>6.4 MB</small></a>
 <a class="btn primary" href="https://cal.com/ian-pilon/20min">Book 20 minutes with Ian</a>
 </div>
-</section>
+</header>
 
-<section class="slides">
-<div class="slide"><img src="slides/01-cover.jpg" alt="Sell a business a buyer can talk to. Ask by voice or text. Get the answer. A managed business memory you can talk to, built for M&amp;A advisors and the owner-run businesses they take to market."></div>
-<div class="slide"><img src="slides/02-problem.jpg" alt="The problem: if the business lives in the owner's head, it isn't ready to sell. Know-how in one head, records in three or more places, no data room." loading="lazy"></div>
-<div class="slide"><img src="slides/03-value.jpg" alt="The value: a business that can hand over its memory is worth more. Less owner dependency, more transferable, a stronger valuation." loading="lazy"></div>
-<div class="slide"><img src="slides/04-pattern.jpg" alt="The pattern, four steps: dig it out, one record, ask it, hand it over. The first 90 days are the dig." loading="lazy"></div>
-<div class="slide"><img src="slides/05-proof.jpg" alt="Built for a real business, a reefer trailer leasing and service company with 14 years of records, and rebuilt as working demos for six more kinds of business." loading="lazy"></div>
-<div class="slide" id="demo"><img src="slides/06-demo.jpg" alt="One of the demos: a towing owner talking to his business." loading="lazy"><video controls playsinline preload="none" poster="demo-poster.jpg" aria-label="90-second demo: the owner of a towing company asks where Truck 3 is, whether Lynden Rentals owes money, and for the latest invoice, and hears each answer aloud"><source src="VoiceClaw-HN-Towing-demo.mp4" type="video/mp4"></video></div>
-<p class="hint">Sound on. The demo runs on sample data.</p>
-<div class="slide"><img src="slides/07-deal.jpg" alt="For advisors: where it fits in your deal (exit preparation, diligence, buy-side, after close) and how we work together." loading="lazy"></div>
-<div class="slide"><img src="slides/08-close.jpg" alt="Have an owner whose records would not survive diligence? Ian Pilon, Founder. ian@voiceclaw.ca" loading="lazy"></div>
-</section>
+<main class="deck" aria-roledescription="slide deck" aria-label="VoiceClaw deck">
+<div class="stage" id="stage">
+<div class="slide" id="s1" aria-label="Slide 1 of 8"><img src="slides/01-cover.jpg" alt="Sell a business a buyer can talk to. Ask by voice or text. Get the answer. A managed business memory you can talk to, built for M&amp;A advisors and the owner-run businesses they take to market."></div>
+<div class="slide" id="s2" aria-label="Slide 2 of 8"><img src="slides/02-problem.jpg" alt="The problem: if the business lives in the owner's head, it isn't ready to sell. Know-how in one head, records in three or more places, no data room."></div>
+<div class="slide" id="s3" aria-label="Slide 3 of 8"><img src="slides/03-value.jpg" alt="The value: a business that can hand over its memory is worth more. Less owner dependency, more transferable, a stronger valuation."></div>
+<div class="slide" id="s4" aria-label="Slide 4 of 8"><img src="slides/04-pattern.jpg" alt="The pattern, four steps: dig it out, one record, ask it, hand it over. The first 90 days are the dig."></div>
+<div class="slide" id="s5" aria-label="Slide 5 of 8"><img src="slides/05-proof.jpg" alt="Built for a real business, a reefer trailer leasing and service company with 14 years of records, and rebuilt as working demos for six more kinds of business."></div>
+<div class="slide" id="s6" aria-label="Slide 6 of 8"><img src="slides/06-demo.jpg" alt="One of the demos: a towing owner talking to his business."><video playsinline preload="none" poster="demo-poster.jpg" aria-label="90-second demo: the owner of a towing company asks where Truck 3 is, whether Lynden Rentals owes money, and for the latest invoice, and hears each answer aloud"><source src="VoiceClaw-HN-Towing-demo.mp4" type="video/mp4"></video></div>
+<div class="slide" id="s7" aria-label="Slide 7 of 8"><img src="slides/07-deal.jpg" alt="For advisors: where it fits in your deal (exit preparation, diligence, buy-side, after close) and how we work together."></div>
+<div class="slide" id="s8" aria-label="Slide 8 of 8"><img src="slides/08-close.jpg" alt="Have an owner whose records would not survive diligence? Ian Pilon, Founder. ian@voiceclaw.ca"></div>
+<button class="arrow prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+<button class="arrow next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<div class="bar">
+<button class="step prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+<div class="dots" id="dots"></div>
+<span class="count" id="count" aria-live="polite">1 / 8</span>
+<button class="step next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<p class="hint" id="hint">Use the arrows, your arrow keys, or swipe.</p>
+</main>
 
 <footer>Ian Pilon, Founder · <a href="mailto:ian@voiceclaw.ca">ian@voiceclaw.ca</a> · <a href="/">voiceclaw.ca</a></footer>
 </div>
 <script src="/assets/measure.js?v=1"></script>
 <script>
-document.querySelector('#demo video').addEventListener('play', function () {
-  if (window.posthog) posthog.capture('deck_video_played');
-}, { once: true });
-document.querySelectorAll('a[data-file]').forEach(function (a) {
-  a.addEventListener('click', function () {
-    if (window.posthog) posthog.capture('deck_downloaded', { file: a.dataset.file });
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var n = slides.length, cur = -1;
+  var video = document.querySelector('#s6 video');
+  var dots = document.getElementById('dots'), count = document.getElementById('count'), hint = document.getElementById('hint');
+  var seen = {};
+
+  slides.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
   });
-});
+
+  function go(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (i === cur) return;
+    slides.forEach(function (s, k) {
+      s.classList.toggle('on', k === i);
+      s.classList.toggle('from-left', k < i);
+      s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+    });
+    if (cur === 5 && video && !video.paused) video.pause();
+    cur = i;
+    Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('on', k === i); });
+    count.textContent = (i + 1) + ' / ' + n;
+    document.querySelectorAll('.prev').forEach(function (b) { b.disabled = i === 0; });
+    document.querySelectorAll('.next').forEach(function (b) { b.disabled = i === n - 1; });
+    hint.textContent = i === 5 ? 'Press play on the demo. Sound on. It runs on sample data.' : (i === n - 1 ? 'That is the whole deck. Book 20 minutes with Ian at the top.' : 'Use the arrows, your arrow keys, or swipe.');
+    history.replaceState(null, '', i === 5 ? '#demo' : (i === 0 ? location.pathname : '#' + (i + 1)));
+    if (!seen[i] && window.posthog) { seen[i] = true; posthog.capture('deck_slide_viewed', { slide: i + 1 }); }
+  }
+
+  document.querySelectorAll('.prev').forEach(function (b) { b.addEventListener('click', function () { go(cur - 1); }); });
+  document.querySelectorAll('.next').forEach(function (b) { b.addEventListener('click', function () { go(cur + 1); }); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'VIDEO') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { go(cur + 1); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(cur - 1); e.preventDefault(); }
+  });
+
+  var x0 = null, y0 = null;
+  var stage = document.getElementById('stage');
+  stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
+
+  var h = location.hash.replace('#', '');
+  go(h === 'demo' ? 5 : (parseInt(h, 10) > 0 ? parseInt(h, 10) - 1 : 0));
+
+  if (video) video.addEventListener('click', function () {
+    if (!video.controls) { video.controls = true; video.play(); }
+  });
+  if (video) video.addEventListener('play', function () { if (window.posthog) posthog.capture('deck_video_played'); }, { once: true });
+  document.querySelectorAll('a[data-file]').forEach(function (a) {
+    a.addEventListener('click', function () { if (window.posthog) posthog.capture('deck_downloaded', { file: a.dataset.file }); });
+  });
+})();
 </script>
 </body>
 </html>
